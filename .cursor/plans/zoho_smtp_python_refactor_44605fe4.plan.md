@@ -4,19 +4,19 @@ overview: Inventory shows a small Flask waitlist app using Supabase and Zoho SMT
 todos:
   - id: verify-zoho-server
     content: Read Zoho Mail → Mail Accounts → Server configuration; set ZOHO_SMTP_HOST/PORT (and TLS vs SSL) to match account/datacenter
-    status: pending
+    status: completed
   - id: fix-app-smtp
     content: "Refactor app.py: SMTP defaults, optional STARTTLS:587, credential guards, robust template loading, multipart plain+HTML + headers"
-    status: pending
+    status: completed
   - id: pin-requirements
     content: Expand requirements.txt with supabase, python-dotenv, email-validator, jinja2 (and compatible Flask pin)
-    status: pending
+    status: completed
   - id: sync-docs
     content: Rewrite EMAIL_SETUP.md and QUICK_START.md for Zoho SMTP (remove Resend); link official limits/SMTP docs
-    status: pending
+    status: completed
   - id: manual-test
     content: "Exercise /api/join end-to-end: Supabase row + inbox delivery + logs on intentional SMTP failure"
-    status: pending
+    status: completed
 isProject: false
 ---
 
