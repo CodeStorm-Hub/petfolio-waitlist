@@ -1,108 +1,76 @@
-# PetFolio Email Setup Guide
+# PetFolio Email Setup (Zoho Mail SMTP)
 
 ## Overview
-Your PetFolio waitlist app now sends personalized thank-you emails to new signups! Emails are sent immediately after someone joins and include:
-- Personalized greeting with their name
-- Pet profile details they provided
-- "What's next?" timeline
-- Links to follow PetFolio on social media
-- Modern UI matching PetFolio's brand colors (blue & coral)
 
-## Setup Steps
+After someone joins the waitlist, the Flask app sends a personalized thank-you email using **Zoho Mail SMTP** (`smtplib`). Signups still succeed if SMTP fails.
 
-### 1. Get a Resend Account
-- Go to [resend.com](https://resend.com) and sign up (free tier available)
-- Verify your email address
-- Navigate to **API Keys** in the dashboard
-- Copy your API key
+Official references:
 
-### 2. Verify Your Sender Email
-In Resend:
-- Go to **Domains** or **From Addresses**
-- Add `welcome@petfolio.social` (or your preferred sender email)
-- **Sandbox mode**: You can skip verification and send test emails right away
-- **Production**: You'll need to verify the domain via DNS records
+- [Zoho Mail SMTP configuration](https://www.zoho.com/mail/help/zoho-smtp.html)
+- [Rates, limits, and policies](https://www.zoho.com/mail/help/adminconsole/rates-and-limits.html)
 
-### 3. Update Your `.env` File
-Copy `.env.example` to `.env` and add:
+## SMTP server names (confirm in your account)
+
+Zoho says the **exact** hostname for your mailbox is shown under **Mail → Settings → Mail Accounts → Server configuration**. Typical values:
+
+| Account type | Outgoing server | Ports |
+|--------------|-----------------|-------|
+| Personal `@zohomail.com` and **Free Organization** | `smtp.zoho.com` | **465** (SSL) or **587** (STARTTLS) |
+| **Paid Organization** with domain email (`you@yourdomain.com`) | Often `smtppro.zoho.com` | Same ports |
+
+EU / India datacenters may use different hosts (e.g. `smtp.zoho.eu`). Always match what Zoho shows in your UI.
+
+This app uses **implicit SSL** (`SMTP_SSL`) on port **465** by default. If you use port **587**, it connects with **STARTTLS** automatically.
+
+## Authentication
+
+- Use the **full mailbox address** as the SMTP username (same as `ZOHO_MAIL_ADDRESS`). A mismatch often causes **Relaying disallowed**.
+- If **two-factor authentication** is enabled, create an [application-specific password](https://www.zoho.com/mail/help/adminconsole/two-factor-authentication.html#alink5) and use it as `ZOHO_MAIL_PASSWORD`.
+
+## Environment variables
+
+Set these in `.env` (see keys below). Optional values tune SMTP:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ZOHO_MAIL_ADDRESS` | Yes (for sending) | Sender login and `From` address |
+| `ZOHO_MAIL_PASSWORD` | Yes (for sending) | Mailbox password or app-specific password |
+| `ZOHO_SMTP_HOST` | No | Default `smtp.zoho.com` |
+| `ZOHO_SMTP_PORT` | No | Default `465` (SSL). Use `587` for STARTTLS |
+| `ZOHO_MAIL_REPLY_TO` | No | `Reply-To` header (defaults to `ZOHO_MAIL_ADDRESS`) |
+| `PETFOLIO_UNSUBSCRIBE_URL` | No | URL for list unsubscribe header and template link |
+
+If `ZOHO_MAIL_ADDRESS` or `ZOHO_MAIL_PASSWORD` is unset, thank-you emails are **skipped** and a warning is logged; the API response is still successful after Supabase insert.
+
+## Install and run
+
 ```bash
-RESEND_API_KEY=your_actual_api_key_here
-```
-
-### 4. Install Dependencies
-Dependencies are already in `requirements.txt`, but make sure they're installed:
-```bash
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+python app.py
 ```
 
-### 5. Test It Out
-1. Start your Flask app: `python app.py`
-2. Go to your waitlist form and sign up with a test email
-3. Check the inbox for the thank-you email
-4. You'll see a success message in the terminal: `✅ Thank you email sent successfully to...`
+Submit the waitlist form and watch the terminal logs for send success or SMTP errors.
 
-## Email Template Customization
+## Email content
 
-The email template is in `templates/email/thank_you.html`. To customize:
-- **Brand colors**: Search for hex codes (#2979FF, #5BA3F5, etc.)
-- **Social links**: Update Twitter, Instagram, Discord URLs
-- **Company info**: Change "The PetFolio Team" to your actual team name
-- **Links**: Update `https://petfolio.social` to your actual domain
-
-### Template Variables Available
-- `{{ name }}` - User's name
-- `{{ pet_kind }}` - Type of pet (Dog, Cat, etc.)
-- `{{ pet_count }}` - Number of pets
-- `{{ unsubscribe_url }}` - Link to unsubscribe (configure in `app.py`)
-
-## Error Handling
-- ✅ Emails won't break user signups if they fail to send
-- ⚠️ Failed email attempts are logged to the terminal
-- All email errors are gracefully handled
+- Template: `templates/email/thank_you.html` (HTML part).
+- A **plain-text** part is generated in code for better client compatibility.
+- Customize branding, links, and copy in the HTML template. Optional: align `PETFOLIO_UNSUBSCRIBE_URL` with a real unsubscribe endpoint before promising one-click unsubscribe in marketing channels.
 
 ## Troubleshooting
 
-**"Import 'resend' could not be resolved"**
-- Make sure virtual environment is activated
-- Run: `pip install resend`
+- **Authentication failure**: Wrong password, need app password with 2FA, or wrong datacenter host.
+- **Relaying disallowed**: `From` must match the authenticated mailbox or an allowed alias.
+- **Connection errors**: Confirm firewall allows outbound **465** or **587**. Try **587** if **465** is blocked.
+- **Duplicate messages in Sent**: See Zoho’s note about disabling duplicate “save to Sent” for SMTP clients in [SMTP help](https://www.zoho.com/mail/help/zoho-smtp.html).
 
-**Email not sending in production**
-- Verify your sender email is verified in Resend dashboard
-- Check API key is correctly set in `.env`
-- Check Resend dashboard for delivery logs
+## Limits
 
-**Template rendering errors**
-- Make sure `templates/email/thank_you.html` file exists
-- Verify file path in `send_thank_you_email()` function matches your setup
+Sending limits are dynamic (often assessed over rolling windows). Very large bursts may be throttled; monitor logs and consider queues if volume grows.
 
-## Next Steps
+## Related files
 
-### Scale Up Emails
-When you're ready to send more complex emails:
-- Use Resend's template feature for pre-built templates
-- Add multiple email types (signup, beta access notification, etc.)
-- Create a background task queue (Celery/RQ) to handle email batches
-
-### Advanced Features
-- Track email opens and clicks in Resend dashboard
-- Create email sequences (welcome → education → CTA)
-- A/B test different email subject lines
-- Add webhook handlers for email bounces/complaints
-
-### Production Checklist
-- [ ] Verify sender domain in Resend (not just sandbox)
-- [ ] Test emails on mobile devices
-- [ ] Add unsubscribe link logic to your backend
-- [ ] Monitor Resend dashboard for bounce/complaint rates
-- [ ] Consider rate limiting for email sends
-
-## Files Modified
-- `app.py` - Added Resend initialization and email sending function
-- `requirements.txt` - Added `resend==2.1.0`
-- `templates/email/thank_you.html` - Modern HTML email template (NEW)
-- `.env.example` - Template for environment variables (NEW)
-
----
-
-Need help? Check Resend documentation: https://resend.com/docs
+- `app.py` — `send_thank_you_email`, SMTP configuration
+- `requirements.txt` — Python dependencies

@@ -1,42 +1,36 @@
-# Quick Start: PetFolio Email Integration
+# Quick Start: Zoho Mail + Waitlist
 
-## 1️⃣ Get Resend API Key
-- Go to [resend.com](https://resend.com) and sign up (free tier available)
-- Generate an API key from the dashboard
+## 1. Zoho SMTP
 
-## 2️⃣ Add API Key to `.env`
+1. Open [Zoho Mail](https://mail.zoho.com) → **Settings** → **Mail Accounts** → your address → **Server configuration** and note **SMTP host** and port (**465** SSL or **587** TLS).
+2. Use your **full email** as the SMTP user. With **2FA**, create an [application-specific password](https://www.zoho.com/mail/help/adminconsole/two-factor-authentication.html#alink5).
+
+Docs: [Zoho SMTP](https://www.zoho.com/mail/help/zoho-smtp.html) · [Limits](https://www.zoho.com/mail/help/adminconsole/rates-and-limits.html)
+
+## 2. `.env`
+
+Configure Supabase (`SUPABASE_URL`, `SUPABASE_KEY`) plus:
+
 ```bash
-RESEND_API_KEY=your_key_here
+ZOHO_MAIL_ADDRESS=welcome@yourdomain.com
+ZOHO_MAIL_PASSWORD=your_app_specific_password_if_needed
+# Optional — defaults shown:
+# ZOHO_SMTP_HOST=smtp.zoho.com
+# ZOHO_SMTP_PORT=465
+# Use ZOHO_SMTP_PORT=587 for STARTTLS if you prefer TLS on 587
 ```
 
-## 3️⃣ Verify Sender Email
-- In Resend dashboard, add `welcome@petfolio.social` (or your preferred sender email)
-- **Sandbox mode**: Skip verification, send test emails immediately
-- **Production**: Verify domain via DNS
+## 3. Run
 
-## 4️⃣ Test It
 ```bash
-source venv/bin/activate  # Activate virtual environment
-python app.py              # Start Flask app
+source .venv/bin/activate   # after python3 -m venv .venv && pip install -r requirements.txt
+python app.py
 ```
 
-Then fill out the waitlist form → check your email for the thank-you message! 🎉
+Submit the waitlist form → check inbox and logs.
 
-## What Happens
-✅ User signs up on the waitlist  
-✅ Data saved to Supabase  
-✅ Thank-you email sent automatically with:
-- Personalized greeting
-- Their pet details
-- What to expect next
-- Social media links
+## 4. Customize
 
-## Customize
-Edit `templates/email/thank_you.html` to:
-- Change colors/branding
-- Update social media links
-- Modify company info
-- Add/remove content sections
+Edit `templates/email/thank_you.html` for HTML branding; plain text is built in `app.py`.
 
-## Need Help?
-See [EMAIL_SETUP.md](EMAIL_SETUP.md) for full documentation and troubleshooting.
+Full detail: [EMAIL_SETUP.md](EMAIL_SETUP.md).
