@@ -1490,12 +1490,825 @@
     .testi-name { font-size: 13px; font-weight: 700; color: var(--ink); }
     .testi-pet  { font-size: 12px; color: var(--ink-lt); margin-top: 2px; }
 
+    /* ── APP MOCKUP SECTION ─────────────────────── */
+    .app-mockup-section {
+      background: #0F0F1E;
+      position: relative;
+      overflow: hidden;
+      padding: 96px 48px;
+    }
+
+    .app-mockup-section::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 520px; height: 520px;
+      background: radial-gradient(ellipse at center, rgba(255,158,125,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .app-mockup-section::after {
+      content: '';
+      position: absolute;
+      bottom: -140px; left: -100px;
+      width: 480px; height: 480px;
+      background: radial-gradient(ellipse at center, rgba(41,121,255,0.11) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ams-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 72px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ams-left {}
+
+    .ams-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #FF9E7D;
+      background: rgba(255,158,125,0.12);
+      border: 1px solid rgba(255,158,125,0.28);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .ams-headline {
+      font-size: clamp(28px, 3.6vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.1;
+      color: #FFFFFF;
+      margin-bottom: 14px;
+    }
+
+    .ams-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 380px;
+      margin-bottom: 36px;
+    }
+
+    /* Vertical screen-selector tabs */
+    .screen-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .screen-tab {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 11px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      background: transparent;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .screen-tab:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .screen-tab.active {
+      background: rgba(255,158,125,0.10);
+      border-color: rgba(255,158,125,0.32);
+    }
+
+    .st-icon {
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.07);
+      transition: background 0.2s;
+    }
+
+    .screen-tab.active .st-icon-home  { background: rgba(245,166,35,0.22); }
+    .screen-tab.active .st-icon-match { background: rgba(255,107,107,0.22); }
+    .screen-tab.active .st-icon-nut   { background: rgba(91,169,154,0.22); }
+    .screen-tab.active .st-icon-mkt   { background: rgba(41,121,255,0.22); }
+    .screen-tab.active .st-icon-soc   { background: rgba(155,89,182,0.22); }
+
+    .st-text {}
+    .st-name { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .st-desc { font-size: 11.5px; color: rgba(255,255,255,0.42); margin-top: 2px; }
+
+    /* Phone frame */
+    .ams-phone-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .phone-frame {
+      width: 260px;
+      height: 540px;
+      background: #0A0A1A;
+      border-radius: 44px;
+      box-shadow: 0 0 0 10px #1E1E2E, 0 0 0 13px #2A2A4E, 0 50px 100px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Dynamic island notch */
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 88px; height: 26px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 50;
+    }
+
+    /* Screens container */
+    .phone-screens {
+      position: absolute;
+      inset: 0;
+      border-radius: 44px;
+      overflow: hidden;
+    }
+
+    /* Individual screen */
+    .ms {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      pointer-events: none;
+    }
+
+    .ms.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ── SHARED PHONE UI PRIMITIVES ── */
+    .ph-bg-white { background: #FFFFFF; width: 100%; height: 100%; display: flex; flex-direction: column; font-size: 11px; }
+
+    /* Status bar */
+    .ph-status {
+      height: 44px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      padding-top: 8px;
+    }
+
+    .ph-status-time { font-size: 13px; font-weight: 700; color: #1D1D1F; }
+    .ph-status-time.light { color: rgba(255,255,255,0.95); }
+
+    .ph-status-icons { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #1D1D1F; }
+    .ph-status-icons.light { color: rgba(255,255,255,0.95); }
+
+    /* Phone bottom nav */
+    .ph-nav {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 54px;
+      background: rgba(255,255,255,0.97);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px 6px;
+      z-index: 10;
+    }
+
+    .ph-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 18px;
+      color: #AEAEB2;
+      flex: 1;
+    }
+
+    .ph-nav-item span { font-size: 8.5px; font-weight: 600; color: #AEAEB2; }
+    .ph-nav-item.active { color: #2979FF; }
+    .ph-nav-item.active span { color: #2979FF; }
+    .ph-nav-active-dot {
+      width: 18px; height: 2.5px;
+      background: #2979FF;
+      border-radius: 2px;
+      margin-bottom: 2px;
+    }
+
+    /* ── SCREEN 1: HOME ── */
+    .s1-header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px 10px;
+      gap: 9px;
+    }
+
+    .s1-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F5A623 0%, #5BA99A 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .s1-pet-label { font-size: 8px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #AEAEB2; }
+    .s1-pet-name  { font-size: 13px; font-weight: 700; color: #1D1D1F; }
+
+    .s1-header-right { margin-left: auto; display: flex; gap: 8px; font-size: 16px; }
+
+    /* Streak card */
+    .s1-streak-card {
+      margin: 0 14px 10px;
+      background: linear-gradient(135deg, #F5A623 0%, #FF9E7D 55%, #C97B55 100%);
+      border-radius: 18px;
+      padding: 12px 14px;
+      color: white;
+    }
+
+    .s1-sc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .s1-sc-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+
+    .s1-sc-pill {
+      font-size: 8px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.22);
+      padding: 2px 7px;
+      border-radius: 100px;
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .s1-sc-big { font-size: 28px; font-weight: 800; line-height: 1.1; }
+    .s1-sc-big span { font-size: 12px; font-weight: 500; opacity: 0.85; margin-left: 4px; }
+
+    .s1-dots {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .s1-dot {
+      flex: 1;
+      height: 20px;
+      border-radius: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7px;
+      font-weight: 700;
+    }
+
+    .s1d-fill  { background: rgba(255,255,255,0.85); color: #C97B55; }
+    .s1d-today { background: white; color: #C97B55; box-shadow: 0 0 0 2px rgba(255,255,255,0.4); }
+
+    /* Pet stats grid */
+    .s1-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin: 0 14px 10px;
+    }
+
+    .s1-stat {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 10px;
+      padding: 6px 4px;
+      text-align: center;
+    }
+
+    .s1-stat-lbl { font-size: 7.5px; color: #AEAEB2; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .s1-stat-val { font-size: 10px; font-weight: 700; color: #1D1D1F; margin-top: 2px; }
+
+    /* Blue profile btn */
+    .s1-profile-btn {
+      margin: 0 14px 8px;
+      background: #2979FF;
+      color: white;
+      border-radius: 100px;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* Seller dashboard row */
+    .s1-seller-row {
+      margin: 0 14px 8px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 12px;
+      padding: 9px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .s1-seller-icon {
+      width: 28px; height: 28px;
+      background: rgba(91,169,154,0.14);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .s1-seller-title { font-size: 10px; font-weight: 700; color: #1D1D1F; }
+    .s1-seller-sub   { font-size: 8px; color: #6E6E73; margin-top: 1px; }
+    .s1-seller-arrow { margin-left: auto; font-size: 14px; color: #AEAEB2; }
+
+    /* Tab bar */
+    .s1-tabs {
+      display: flex;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      margin: 0 14px 8px;
+    }
+
+    .s1-tab {
+      flex: 1;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 5px 0;
+      color: #AEAEB2;
+    }
+
+    .s1-tab.active { color: #2979FF; border-bottom: 2px solid #2979FF; }
+
+    /* Today section */
+    .s1-today-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #AEAEB2;
+      padding: 0 14px 6px;
+    }
+
+    /* Task rows */
+    .s1-task {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .s1-task-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .s1-task-name { font-size: 9.5px; font-weight: 600; color: #1D1D1F; }
+    .s1-task-meta { font-size: 8px; color: #6E6E73; margin-top: 1px; }
+
+    .s1-task-btn {
+      margin-left: auto;
+      font-size: 8px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .stb-gray  { background: rgba(0,0,0,0.08); color: #424245; }
+    .stb-green { background: #5BA99A; color: white; }
+
+    /* ── SCREEN 2: MATCH ── */
+    .s2-header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px 8px;
+      gap: 9px;
+    }
+
+    .s2-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6B8FB8, #4A6F99);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .s2-header-right { margin-left: auto; display: flex; gap: 8px; font-size: 16px; }
+
+    .s2-match-card {
+      margin: 0 14px 10px;
+      border-radius: 20px;
+      height: 250px;
+      background: linear-gradient(160deg, #FFD4B8 0%, #FF9E7D 45%, #C97B55 100%);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .s2-pet-circle {
+      position: absolute;
+      top: 45%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      background: rgba(0,0,0,0.22);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+    }
+
+    .s2-dist-pill {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      background: rgba(0,0,0,0.22);
+      padding: 3px 9px;
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
+    }
+
+    .s2-card-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
+    }
+
+    .s2-pet-name { font-size: 16px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+    .s2-pet-name span { font-size: 11px; font-weight: 400; opacity: 0.82; margin-left: 4px; }
+    .s2-pet-loc { font-size: 8.5px; color: rgba(255,255,255,0.82); margin: 2px 0 5px; }
+
+    .s2-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+    .s2-tag  { font-size: 7.5px; font-weight: 600; padding: 2px 7px; border-radius: 100px; }
+    .s2t-dk    { background: rgba(0,0,0,0.28); color: rgba(255,255,255,0.95); }
+    .s2t-lt    { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.95); }
+    .s2t-green { background: rgba(91,169,154,0.6); color: white; }
+
+    .s2-dock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 14px;
+    }
+
+    .s2-dock-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,158,125,0.24);
+      background: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .s2-dock-btn.s2-primary {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, #F5A623, #FF9E7D);
+      border-color: transparent;
+      font-size: 22px;
+      box-shadow: 0 4px 16px rgba(255,158,125,0.4);
+    }
+
+    /* ── SCREEN 3: NUTRITION ── */
+    .s3-header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px 8px;
+      gap: 9px;
+    }
+
+    .s3-back { font-size: 18px; color: #1D1D1F; }
+
+    .s3-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5BA99A; }
+    .s3-name  { font-size: 13px; font-weight: 700; color: #1D1D1F; }
+
+    /* Weight trend chart card */
+    .s3-chart-card {
+      margin: 0 14px 8px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      padding: 10px 10px 6px;
+    }
+
+    .s3-chart-title { font-size: 9px; font-weight: 700; color: #1D1D1F; margin-bottom: 6px; }
+
+    .s3-svg-wrap { width: 100%; overflow: hidden; }
+
+    /* Smart nutrition card */
+    .s3-nut-card {
+      margin: 0 14px 8px;
+      background: linear-gradient(135deg, #5BA99A 0%, #4A9087 55%, #357A6E 100%);
+      border-radius: 14px;
+      padding: 12px 13px;
+      color: white;
+    }
+
+    .s3-nut-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
+    .s3-nut-big   { font-size: 32px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+    .s3-nut-unit  { font-size: 9px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+    .s3-nut-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 6px;
+      margin-top: 10px;
+      background: rgba(0,0,0,0.16);
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .s3-ns { text-align: center; }
+    .s3-ns-lbl { font-size: 7.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.58); }
+    .s3-ns-val { font-size: 10px; font-weight: 700; color: white; margin-top: 1px; }
+
+    /* Log history */
+    .s3-log-section { padding: 0 14px; }
+    .s3-log-title { font-size: 9px; font-weight: 700; color: #1D1D1F; margin-bottom: 5px; }
+
+    .s3-log-entry {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .s3-log-icon {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(91,169,154,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .s3-log-val  { font-size: 10px; font-weight: 700; color: #1D1D1F; flex: 1; }
+    .s3-log-date { font-size: 8.5px; color: #6E6E73; }
+
+    /* ── SCREEN 4: MARKET ── */
+    .s4-header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px 8px;
+      gap: 9px;
+    }
+
+    .s4-search {
+      margin: 0 14px 8px;
+      background: rgba(0,0,0,0.06);
+      border-radius: 10px;
+      padding: 7px 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: #AEAEB2;
+    }
+
+    .s4-search span { margin-left: auto; font-size: 13px; }
+
+    .s4-cats {
+      display: flex;
+      gap: 5px;
+      padding: 0 14px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .s4-cat {
+      font-size: 8.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .s4c-active { background: #1D1D1F; color: white; }
+    .s4c-gray   { background: rgba(0,0,0,0.06); color: #6E6E73; }
+
+    .s4-section-head { padding: 0 14px 5px; }
+    .s4-section-title { font-size: 11px; font-weight: 700; color: #1D1D1F; }
+    .s4-section-sub   { font-size: 8px; color: #6E6E73; }
+
+    .s4-shops {
+      display: flex;
+      gap: 8px;
+      padding: 0 14px;
+      margin-bottom: 8px;
+    }
+
+    .s4-shop-card {
+      flex: 1;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 11px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .s4-shop-icon { font-size: 15px; }
+    .s4-shop-name { font-size: 8.5px; font-weight: 700; color: #1D1D1F; }
+    .s4-shop-sub  { font-size: 7px; color: #6E6E73; }
+
+    /* Subscription banner */
+    .s4-sub-banner {
+      margin: 0 14px 6px;
+      background: linear-gradient(135deg, #5BA99A 0%, #4A9087 100%);
+      border-radius: 12px;
+      padding: 9px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+    }
+
+    .s4-sub-icon { font-size: 14px; flex-shrink: 0; }
+    .s4-sub-lbl  { font-size: 7px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .s4-sub-name { font-size: 11px; font-weight: 700; }
+    .s4-sub-meta { font-size: 7.5px; color: rgba(255,255,255,0.78); }
+    .s4-sub-btn  { margin-left: auto; background: white; color: #5BA99A; font-size: 8px; font-weight: 700; padding: 4px 9px; border-radius: 100px; flex-shrink: 0; }
+
+    .s4-sub-row {
+      padding: 0 14px;
+      margin-bottom: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #1D1D1F;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .s4-sub-row span { font-size: 8px; font-weight: 500; color: #6E6E73; }
+
+    .s4-products {
+      display: flex;
+      gap: 8px;
+      padding: 0 14px;
+      overflow: hidden;
+    }
+
+    .s4-prod-card {
+      flex-shrink: 0;
+      width: 80px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .s4-prod-thumb {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .s4-prod-body { padding: 5px 5px 6px; background: white; }
+    .s4-prod-tag  { font-size: 6.5px; font-weight: 700; color: #5BA99A; margin-bottom: 2px; }
+    .s4-prod-brand { font-size: 7.5px; font-weight: 700; color: #1D1D1F; }
+    .s4-prod-name  { font-size: 7px; color: #6E6E73; }
+    .s4-prod-price { font-size: 8px; font-weight: 700; color: #1D1D1F; margin-top: 2px; }
+    .s4-prod-price s { color: #AEAEB2; font-weight: 400; }
+
+    /* ── SCREEN 5: SOCIAL ── */
+    .s5-header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px 6px;
+      gap: 9px;
+    }
+
+    .s5-post {
+      margin: 0 14px 8px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .s5-post-banner {
+      height: 90px;
+      background: linear-gradient(135deg, #E8E8E8 0%, #D0D0D0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #9E9E9E;
+    }
+
+    .s5-post-body { padding: 7px 9px; }
+    .s5-post-caption { font-size: 9.5px; color: #1D1D1F; margin-bottom: 6px; }
+
+    .s5-post-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .s5-post-act { font-size: 9px; color: #6E6E73; display: flex; align-items: center; gap: 3px; }
+    .s5-post-share { margin-left: auto; font-size: 12px; color: #AEAEB2; }
+
+    .s5-post-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px 5px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .s5-post-av {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F5A623 0%, #5BA99A 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .s5-post-user { font-size: 9px; font-weight: 700; color: #1D1D1F; }
+    .s5-post-meta { font-size: 7.5px; color: #6E6E73; }
+    .s5-post-more { margin-left: auto; font-size: 14px; color: #AEAEB2; }
+
+    .s5-cat-photo {
+      height: 100px;
+      background: linear-gradient(135deg, #F0EEE8 0%, #E8E4DC 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+    }
+
+    /* FAB button */
+    .s5-fab {
+      position: absolute;
+      bottom: 60px;
+      right: 14px;
+      width: 38px; height: 38px;
+      background: #2979FF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(41,121,255,0.4);
+      z-index: 5;
+    }
+
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 960px) {
       nav { padding: 0 20px; }
 
       .proof-strip { padding: 18px 24px; gap: 24px; }
       .proof-div   { display: none; }
+
+      .app-mockup-section { padding: 72px 24px; }
+      .ams-inner { grid-template-columns: 1fr; gap: 44px; justify-items: center; }
+      .ams-left  { width: 100%; }
+      .ams-sub   { max-width: 100%; }
 
       .testimonials-section { padding: 40px 24px 52px; }
       .testimonials-inner   { grid-template-columns: 1fr; gap: 14px; }
@@ -1517,6 +2330,8 @@
 
     @media (max-width: 600px) {
       .hero { padding: 112px 20px 76px; }
+
+      .phone-frame { width: 230px; height: 480px; }
       .hd1,.hd2,.hd3,.hd4,.hd5,.hd6 { display: none; }
 
       .wl-card { padding: 24px 20px; }
@@ -1668,6 +2483,461 @@
     </div>
   </div>
 </div>
+
+<!-- ── APP MOCKUP ── -->
+<section class="app-mockup-section">
+  <div class="ams-inner">
+
+    <!-- Left column -->
+    <div class="ams-left">
+      <div class="ams-eyebrow">📱 Live app preview</div>
+      <h2 class="ams-headline">See PetFolio<br>in action.</h2>
+      <p class="ams-sub">Every screen crafted for devoted pet parents. Tap a tab to explore each feature — built with love for you and your pet.</p>
+
+      <div class="screen-tabs">
+        <div class="screen-tab active" data-screen="0">
+          <div class="st-icon st-icon-home">🏠</div>
+          <div class="st-text">
+            <div class="st-name">Home</div>
+            <div class="st-desc">Daily streaks &amp; tasks at a glance</div>
+          </div>
+        </div>
+        <div class="screen-tab" data-screen="1">
+          <div class="st-icon st-icon-match">❤️</div>
+          <div class="st-text">
+            <div class="st-name">Match</div>
+            <div class="st-desc">Find playdates nearby</div>
+          </div>
+        </div>
+        <div class="screen-tab" data-screen="2">
+          <div class="st-icon st-icon-nut">🥩</div>
+          <div class="st-text">
+            <div class="st-name">Nutrition</div>
+            <div class="st-desc">NRC-based smart feeding</div>
+          </div>
+        </div>
+        <div class="screen-tab" data-screen="3">
+          <div class="st-icon st-icon-mkt">🛍️</div>
+          <div class="st-text">
+            <div class="st-name">Market</div>
+            <div class="st-desc">Shop &amp; subscribe to pet essentials</div>
+          </div>
+        </div>
+        <div class="screen-tab" data-screen="4">
+          <div class="st-icon st-icon-soc">👥</div>
+          <div class="st-text">
+            <div class="st-name">Social</div>
+            <div class="st-desc">Your pet's social world</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: Phone frame -->
+    <div class="ams-phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screens">
+
+          <!-- ── SCREEN 1: HOME ── -->
+          <div class="ms active">
+            <div class="ph-bg-white" style="overflow:hidden;">
+              <!-- Status bar -->
+              <div class="ph-status">
+                <span class="ph-status-time">7:54</span>
+                <span class="ph-status-icons">▲ ☁ 🔋</span>
+              </div>
+              <!-- Header -->
+              <div class="s1-header">
+                <div class="s1-avatar">🐱</div>
+                <div>
+                  <div class="s1-pet-label">Active Pet</div>
+                  <div class="s1-pet-name">Montu ⌄</div>
+                </div>
+                <div class="s1-header-right">☀️ 🔔</div>
+              </div>
+              <!-- Streak card -->
+              <div class="s1-streak-card">
+                <div class="s1-sc-top">
+                  <div class="s1-sc-label">Health Streak</div>
+                  <div class="s1-sc-pill">🟢 on a walk</div>
+                </div>
+                <div class="s1-sc-big">7 <span>days on track</span></div>
+                <div class="s1-dots">
+                  <div class="s1-dot s1d-fill">M</div>
+                  <div class="s1-dot s1d-fill">T</div>
+                  <div class="s1-dot s1d-fill">W</div>
+                  <div class="s1-dot s1d-fill">T</div>
+                  <div class="s1-dot s1d-fill">F</div>
+                  <div class="s1-dot s1d-fill">S</div>
+                  <div class="s1-dot s1d-today">S</div>
+                </div>
+              </div>
+              <!-- Pet stats -->
+              <div class="s1-stats-grid">
+                <div class="s1-stat"><div class="s1-stat-lbl">Breed</div><div class="s1-stat-val">Persian</div></div>
+                <div class="s1-stat"><div class="s1-stat-lbl">Age</div><div class="s1-stat-val">2 yrs</div></div>
+                <div class="s1-stat"><div class="s1-stat-lbl">Weight</div><div class="s1-stat-val">2.0 kg</div></div>
+                <div class="s1-stat"><div class="s1-stat-lbl">Sex</div><div class="s1-stat-val">Male</div></div>
+              </div>
+              <!-- Profile button -->
+              <div class="s1-profile-btn">🔗 View Social Profile</div>
+              <!-- Seller row -->
+              <div class="s1-seller-row">
+                <div class="s1-seller-icon">🏪</div>
+                <div>
+                  <div class="s1-seller-title">Seller Dashboard</div>
+                  <div class="s1-seller-sub">Manage your shop, products, and orders</div>
+                </div>
+                <div class="s1-seller-arrow">›</div>
+              </div>
+              <!-- Tab bar -->
+              <div class="s1-tabs">
+                <div class="s1-tab active">Overview</div>
+                <div class="s1-tab">Health</div>
+                <div class="s1-tab">Care</div>
+                <div class="s1-tab">Awards</div>
+              </div>
+              <!-- Today -->
+              <div class="s1-today-label">Today</div>
+              <div class="s1-task">
+                <div class="s1-task-icon" style="background:rgba(245,166,35,0.15)">🍗</div>
+                <div>
+                  <div class="s1-task-name">Heartworm tablet</div>
+                  <div class="s1-task-meta">9:00 AM · Daily</div>
+                </div>
+                <div class="s1-task-btn stb-gray">Mark done</div>
+              </div>
+              <div class="s1-task">
+                <div class="s1-task-icon" style="background:rgba(91,169,154,0.15)">🚶</div>
+                <div>
+                  <div class="s1-task-name">Evening walk with Montu</div>
+                  <div class="s1-task-meta">2 / 3 walks today</div>
+                </div>
+                <div class="s1-task-btn stb-green">Start walk</div>
+              </div>
+              <!-- Bottom nav -->
+              <div class="ph-nav">
+                <div class="ph-nav-item active"><div>🐾</div><div class="ph-nav-active-dot"></div><span>Pets</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Care</span></div>
+                <div class="ph-nav-item"><div>👥</div><span>Social</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Match</span></div>
+                <div class="ph-nav-item"><div>🏪</div><span>Market</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCREEN 2: MATCH ── -->
+          <div class="ms">
+            <div class="ph-bg-white" style="overflow:hidden;">
+              <div class="ph-status">
+                <span class="ph-status-time">10:11</span>
+                <span class="ph-status-icons">▲ ☁ 🔋</span>
+              </div>
+              <div class="s2-header">
+                <div class="s2-avatar">R</div>
+                <div>
+                  <div class="s1-pet-label">Match · Nearby</div>
+                  <div class="s1-pet-name">Rex ⌄</div>
+                </div>
+                <div class="s2-header-right">💬 ⚙️</div>
+              </div>
+              <!-- Match card -->
+              <div class="s2-match-card">
+                <div class="s2-dist-pill">📍 Within 2 miles</div>
+                <div class="s2-pet-circle">🐕</div>
+                <div class="s2-card-bottom">
+                  <div class="s2-pet-name">Ziggy <span>4yr</span></div>
+                  <div class="s2-pet-loc">📍 Within 2 miles · Leopard Gecko</div>
+                  <div class="s2-tags">
+                    <span class="s2-tag s2t-dk">Reptile</span>
+                    <span class="s2-tag s2t-lt">Leopard Gecko</span>
+                    <span class="s2-tag s2t-green">Medium · 45–60 min</span>
+                    <span class="s2-tag s2t-dk">Friendly</span>
+                    <span class="s2-tag s2t-dk">Playful</span>
+                    <span class="s2-tag s2t-dk">Good on lead</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Swipe dock -->
+              <div class="s2-dock" style="margin-top:10px;">
+                <div class="s2-dock-btn">✕</div>
+                <div class="s2-dock-btn">👋</div>
+                <div class="s2-dock-btn s2-primary">🐾</div>
+                <div class="s2-dock-btn">⭐</div>
+                <div class="s2-dock-btn">⚡</div>
+              </div>
+              <div class="ph-nav">
+                <div class="ph-nav-item"><div>🐾</div><span>Pets</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Care</span></div>
+                <div class="ph-nav-item"><div>👥</div><span>Social</span></div>
+                <div class="ph-nav-item active"><div>❤️</div><div class="ph-nav-active-dot"></div><span>Match</span></div>
+                <div class="ph-nav-item"><div>🏪</div><span>Market</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCREEN 3: NUTRITION ── -->
+          <div class="ms">
+            <div class="ph-bg-white" style="overflow:hidden;">
+              <div class="ph-status">
+                <span class="ph-status-time">7:55</span>
+                <span class="ph-status-icons">▲ ☁ 🔋</span>
+              </div>
+              <div class="s3-header">
+                <div class="s3-back">←</div>
+                <div>
+                  <div class="s3-label">Nutrition</div>
+                  <div class="s3-name">Montu</div>
+                </div>
+              </div>
+              <!-- Weight trend chart -->
+              <div class="s3-chart-card">
+                <div class="s3-chart-title">📈 Weight Trend</div>
+                <svg viewBox="0 0 220 60" width="100%" height="60" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#5BA99A" stop-opacity="0.35"/>
+                      <stop offset="100%" stop-color="#5BA99A" stop-opacity="0.02"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Area fill -->
+                  <path d="M0,8 L32,42 L64,48 L96,50 L128,52 L160,53 L192,54 L220,55 L220,60 L0,60 Z" fill="url(#chartFill)"/>
+                  <!-- Line -->
+                  <polyline points="0,8 32,42 64,48 96,50 128,52 160,53 192,54 220,55" fill="none" stroke="#5BA99A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                  <!-- Dots -->
+                  <circle cx="0"   cy="8"  r="3" fill="#5BA99A"/>
+                  <circle cx="32"  cy="42" r="2.5" fill="#5BA99A"/>
+                  <circle cx="64"  cy="48" r="2.5" fill="#5BA99A"/>
+                  <circle cx="96"  cy="50" r="2.5" fill="#5BA99A"/>
+                  <circle cx="128" cy="52" r="2.5" fill="#5BA99A"/>
+                  <circle cx="160" cy="53" r="2.5" fill="#5BA99A"/>
+                  <circle cx="192" cy="54" r="2.5" fill="#5BA99A"/>
+                  <circle cx="220" cy="55" r="2.5" fill="#5BA99A"/>
+                  <!-- X labels -->
+                  <text x="0"   y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/17</text>
+                  <text x="32"  y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/16</text>
+                  <text x="64"  y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/15</text>
+                  <text x="96"  y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/14</text>
+                  <text x="128" y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/13</text>
+                  <text x="160" y="60" font-size="7" fill="#AEAEB2" text-anchor="middle">5/12</text>
+                </svg>
+              </div>
+              <!-- Smart nutrition card -->
+              <div class="s3-nut-card">
+                <div class="s3-nut-label">🔥 Smart Nutrition</div>
+                <div class="s3-nut-big">1292</div>
+                <div class="s3-nut-unit">kcal / day recommended</div>
+                <div class="s3-nut-stats">
+                  <div class="s3-ns"><div class="s3-ns-lbl">Weight</div><div class="s3-ns-val">30.0 kg</div></div>
+                  <div class="s3-ns"><div class="s3-ns-lbl">Activity</div><div class="s3-ns-val">Moderate</div></div>
+                  <div class="s3-ns"><div class="s3-ns-lbl">Species</div><div class="s3-ns-val">Cat</div></div>
+                </div>
+              </div>
+              <!-- Log history -->
+              <div class="s3-log-section">
+                <div class="s3-log-title">🕐 Log History</div>
+                <div class="s3-log-entry">
+                  <div class="s3-log-icon">📊</div>
+                  <div class="s3-log-val">0.90 kg</div>
+                  <div class="s3-log-date">2026/05/12</div>
+                </div>
+                <div class="s3-log-entry">
+                  <div class="s3-log-icon">📊</div>
+                  <div class="s3-log-val">1.00 kg</div>
+                  <div class="s3-log-date">2026/05/13</div>
+                </div>
+                <div class="s3-log-entry">
+                  <div class="s3-log-icon">📊</div>
+                  <div class="s3-log-val">1.20 kg</div>
+                  <div class="s3-log-date">2026/05/15</div>
+                </div>
+                <div class="s3-log-entry">
+                  <div class="s3-log-icon">📊</div>
+                  <div class="s3-log-val">2.00 kg</div>
+                  <div class="s3-log-date">2026/05/16</div>
+                </div>
+              </div>
+              <div class="ph-nav">
+                <div class="ph-nav-item"><div>🐾</div><span>Pets</span></div>
+                <div class="ph-nav-item active"><div>🥩</div><div class="ph-nav-active-dot"></div><span>Care</span></div>
+                <div class="ph-nav-item"><div>👥</div><span>Social</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Match</span></div>
+                <div class="ph-nav-item"><div>🏪</div><span>Market</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCREEN 4: MARKET ── -->
+          <div class="ms">
+            <div class="ph-bg-white" style="overflow:hidden;">
+              <div class="ph-status">
+                <span class="ph-status-time">7:57</span>
+                <span class="ph-status-icons">▲ ☁ 🔋</span>
+              </div>
+              <div class="s4-header">
+                <div class="s1-avatar">🐱</div>
+                <div>
+                  <div class="s1-pet-label">Market · Shop</div>
+                  <div class="s1-pet-name">Montu ⌄</div>
+                </div>
+                <div class="s1-header-right">🛒</div>
+              </div>
+              <!-- Search bar -->
+              <div class="s4-search">
+                <span>🔍</span>
+                <span style="color:#AEAEB2;">Search food, gear, treats...</span>
+                <span>⚙️</span>
+              </div>
+              <!-- Category pills -->
+              <div class="s4-cats">
+                <div class="s4-cat s4c-active">All</div>
+                <div class="s4-cat s4c-gray">Food</div>
+                <div class="s4-cat s4c-gray">Gear</div>
+                <div class="s4-cat s4c-gray">Toys</div>
+                <div class="s4-cat s4c-gray">Treats</div>
+                <div class="s4-cat s4c-gray">Health</div>
+              </div>
+              <!-- Shops -->
+              <div class="s4-section-head">
+                <div class="s4-section-title">Discover Shops</div>
+                <div class="s4-section-sub">Independent pet sellers</div>
+              </div>
+              <div class="s4-shops">
+                <div class="s4-shop-card">
+                  <div class="s4-shop-icon">🏪</div>
+                  <div>
+                    <div class="s4-shop-name">PetFolio Offi...</div>
+                    <div class="s4-shop-sub">Official store</div>
+                  </div>
+                </div>
+                <div class="s4-shop-card">
+                  <div class="s4-shop-icon">🏪</div>
+                  <div>
+                    <div class="s4-shop-name">CodeStorm...</div>
+                    <div class="s4-shop-sub">Pet supplies</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Subscription banner -->
+              <div class="s4-sub-banner">
+                <div class="s4-sub-icon">🔄</div>
+                <div>
+                  <div class="s4-sub-lbl">Running Low · Arriving Friday</div>
+                  <div class="s4-sub-name">Bhaat</div>
+                  <div class="s4-sub-meta">Subscription · 12% off · next in 5 days</div>
+                </div>
+                <div class="s4-sub-btn">Manage</div>
+              </div>
+              <!-- Subscribe row -->
+              <div class="s4-sub-row">
+                ● Subscribe &amp; Save <span>Recurring consumables · 12% off</span>
+              </div>
+              <!-- Products -->
+              <div class="s4-products">
+                <div class="s4-prod-card">
+                  <div class="s4-prod-thumb" style="background:linear-gradient(135deg,#FFD4B8,#F5A623)">🛍️</div>
+                  <div class="s4-prod-body">
+                    <div class="s4-prod-tag">SUB · SAVE 12%</div>
+                    <div class="s4-prod-brand">Deshi</div>
+                    <div class="s4-prod-name">Bhaat</div>
+                    <div class="s4-prod-price"><s>$5.00</s> $4.40</div>
+                  </div>
+                </div>
+                <div class="s4-prod-card">
+                  <div class="s4-prod-thumb" style="background:linear-gradient(135deg,#C97B55,#8B4513)">🥩</div>
+                  <div class="s4-prod-body">
+                    <div class="s4-prod-tag">SUB · SAVE 12%</div>
+                    <div class="s4-prod-brand">Wholepack</div>
+                    <div class="s4-prod-name">Beef Liver Treats</div>
+                    <div class="s4-prod-price"><s>$9.20</s> $8.10</div>
+                  </div>
+                </div>
+                <div class="s4-prod-card">
+                  <div class="s4-prod-thumb" style="background:linear-gradient(135deg,#9B59B6,#6C3483)">💊</div>
+                  <div class="s4-prod-body">
+                    <div class="s4-prod-tag">SUB · SAVE 12%</div>
+                    <div class="s4-prod-brand">Vitavet</div>
+                    <div class="s4-prod-name">Joint Support</div>
+                    <div class="s4-prod-price"><s>$24.00</s> $21.12</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ph-nav">
+                <div class="ph-nav-item"><div>🐾</div><span>Pets</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Care</span></div>
+                <div class="ph-nav-item"><div>👥</div><span>Social</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Match</span></div>
+                <div class="ph-nav-item active"><div>🏪</div><div class="ph-nav-active-dot"></div><span>Market</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCREEN 5: SOCIAL ── -->
+          <div class="ms">
+            <div class="ph-bg-white" style="overflow:hidden;position:relative;">
+              <div class="ph-status">
+                <span class="ph-status-time">7:55</span>
+                <span class="ph-status-icons">▲ ☁ 🔋</span>
+              </div>
+              <div class="s5-header">
+                <div class="s1-avatar">🐱</div>
+                <div>
+                  <div class="s1-pet-label">Pack</div>
+                  <div class="s1-pet-name">Montu ⌄</div>
+                </div>
+                <div class="s1-header-right">✉️</div>
+              </div>
+              <!-- Post 1: brand post -->
+              <div class="s5-post">
+                <div class="s5-post-banner">KAYVO</div>
+                <div class="s5-post-body">
+                  <div class="s5-post-caption">wow</div>
+                  <div class="s5-post-actions">
+                    <div class="s5-post-act">❤️ 3</div>
+                    <div class="s5-post-act">💬 5</div>
+                    <div class="s5-post-share">↗</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Post 2: Montu post -->
+              <div class="s5-post">
+                <div class="s5-post-header">
+                  <div class="s5-post-av">🐱</div>
+                  <div>
+                    <div class="s5-post-user">Montu</div>
+                    <div class="s5-post-meta">@syed.reza181 · 3d</div>
+                  </div>
+                  <div class="s5-post-more">···</div>
+                </div>
+                <div class="s5-cat-photo">🐱</div>
+                <div class="s5-post-body">
+                  <div class="s5-post-caption">Catching some sun ☀️</div>
+                  <div class="s5-post-actions">
+                    <div class="s5-post-act">❤️ 2</div>
+                    <div class="s5-post-act">💬 2</div>
+                    <div class="s5-post-share">↗</div>
+                  </div>
+                </div>
+              </div>
+              <!-- FAB -->
+              <div class="s5-fab">📸</div>
+              <div class="ph-nav">
+                <div class="ph-nav-item"><div>🐾</div><span>Pets</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Care</span></div>
+                <div class="ph-nav-item active"><div>👥</div><div class="ph-nav-active-dot"></div><span>Social</span></div>
+                <div class="ph-nav-item"><div>🤍</div><span>Match</span></div>
+                <div class="ph-nav-item"><div>🏪</div><span>Market</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /phone-screens -->
+      </div><!-- /phone-frame -->
+    </div><!-- /ams-phone-wrap -->
+
+  </div><!-- /ams-inner -->
+</section>
 
 <!-- ── TESTIMONIALS ──────────────────────────────────── -->
 <div class="testimonials-section">
@@ -2226,6 +3496,29 @@
       setTimeout(() => btn.textContent = orig, 2000);
     });
   }
+
+  // App mockup carousel
+  (function() {
+    var screens = document.querySelectorAll('.ms');
+    var tabs    = document.querySelectorAll('.screen-tab');
+    if (!screens.length) return;
+    var cur = 0;
+    function goTo(i) {
+      screens[cur].classList.remove('active');
+      if (tabs[cur]) tabs[cur].classList.remove('active');
+      cur = i;
+      screens[cur].classList.add('active');
+      if (tabs[cur]) tabs[cur].classList.add('active');
+    }
+    var timer = setInterval(function(){ goTo((cur + 1) % screens.length); }, 3800);
+    tabs.forEach(function(tab, i) {
+      tab.addEventListener('click', function() {
+        clearInterval(timer);
+        goTo(i);
+        timer = setInterval(function(){ goTo((cur + 1) % screens.length); }, 3800);
+      });
+    });
+  })();
 
   // Hamburger (preserved for compatibility)
   const ham = document.getElementById('hamburger');
