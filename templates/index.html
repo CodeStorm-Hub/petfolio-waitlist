@@ -1404,12 +1404,101 @@
 
     .footer-copy { font-size: 12px; color: var(--ink-xl); }
 
+    /* ── WAITLIST CARD TITLE ─────────────────────── */
+    .wl-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .wl-card-subtitle {
+      font-size: 13px;
+      color: var(--ink-lt);
+      text-align: center;
+      margin-top: -14px;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    /* ── TESTIMONIALS ────────────────────────────── */
+    .testimonials-section {
+      background: var(--cream);
+      padding: 56px 48px 64px;
+    }
+
+    .testimonials-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-xl);
+      margin-bottom: 28px;
+    }
+
+    .testimonials-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border: 1px solid rgba(255,158,125,0.15);
+      border-radius: var(--r-lg);
+      padding: 26px;
+      box-shadow: var(--sh-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .testi-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+
+    .testi-stars {
+      font-size: 13px;
+      color: var(--ora);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .testi-quote {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.72;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .testi-author { display: flex; align-items: center; gap: 11px; }
+
+    .testi-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--peach-soft);
+      border: 1.5px solid rgba(255,158,125,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .testi-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .testi-pet  { font-size: 12px; color: var(--ink-lt); margin-top: 2px; }
+
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 960px) {
       nav { padding: 0 20px; }
 
       .proof-strip { padding: 18px 24px; gap: 24px; }
       .proof-div   { display: none; }
+
+      .testimonials-section { padding: 40px 24px 52px; }
+      .testimonials-inner   { grid-template-columns: 1fr; gap: 14px; }
 
       .section { padding: 72px 24px; }
 
@@ -1486,8 +1575,8 @@
   </h1>
 
   <p class="hero-sub">
-    Track health. Build routines. Find friends.<br>
-    The all-in-one app for modern pet parents.
+    Every wag, purr, and pawprint — captured with love.<br>
+    The all-in-one app built for devoted pet parents like you.
   </p>
 
   <!-- Waitlist Card -->
@@ -1504,14 +1593,17 @@
       </span>
     </div>
 
+    <div class="wl-card-title">Claim your free spot 🐾</div>
+    <p class="wl-card-subtitle">Join early &amp; get lifetime premium — on us.</p>
+
     <div id="form-state">
       <div class="form-row">
-        <input class="form-input" type="text"   id="firstName" placeholder="Your name"       autocomplete="given-name" />
-        <input class="form-input" type="email"  id="email"     placeholder="Email address"   autocomplete="email" />
+        <input class="form-input" type="text"   id="firstName" placeholder="Your first name"  autocomplete="given-name" />
+        <input class="form-input" type="email"  id="email"     placeholder="your@email.com"   autocomplete="email" />
       </div>
       <div class="form-row">
         <select class="form-select" id="petType" onchange="this.classList.add('has-val')">
-          <option value="" disabled selected>Pet type</option>
+          <option value="" disabled selected>My pet is a…</option>
           <option value="dog">🐕 Dog</option>
           <option value="cat">🐈 Cat</option>
           <option value="bird">🦜 Bird</option>
@@ -1520,20 +1612,20 @@
           <option value="fish">🐠 Fish</option>
           <option value="other">🐾 Other</option>
         </select>
-        <input class="form-input" type="number" id="petCount" placeholder="Number of pets" min="1" max="99" />
+        <input class="form-input" type="number" id="petCount" placeholder="How many pets?" min="1" max="99" />
       </div>
-      <button class="btn-join" onclick="handleJoin()">Join the Waitlist &nbsp;→</button>
-      <p class="form-fine">Free forever for beta users &nbsp;·&nbsp; No spam, ever.</p>
+      <button class="btn-join" onclick="handleJoin()">Get my free spot 🐾</button>
+      <p class="form-fine">No credit card &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Just love for your pets.</p>
     </div>
 
     <div class="success-state" id="success-state">
-      <div class="success-ico">🐾</div>
-      <div class="success-title">You're on the list!</div>
+      <div class="success-ico">🎉</div>
+      <div class="success-title">Welcome to the family!</div>
       <p class="success-sub">
-        Check your inbox for a welcome note.<br>
-        Your pet's profile is waiting — you're <strong>#<span id="spot-number">848</span></strong> in line.
+        Your inbox just got a love letter from us. 💌<br>
+        Your pet's journey starts soon — you're <strong>#<span id="spot-number">848</span></strong> in line.
       </p>
-      <div class="success-pos">Early access · Wave 1</div>
+      <div class="success-pos">🐾 Early access · Wave 1</div>
       <div class="share-btns">
         <a class="share-btn" href="https://twitter.com/intent/tweet?text=Just+joined+the+%40PetFolio+beta+waitlist+%F0%9F%90%BE+petfolio.social" target="_blank" rel="noopener">Share on X</a>
         <button class="share-btn" onclick="copyLink()">Copy link</button>
@@ -1577,6 +1669,50 @@
   </div>
 </div>
 
+<!-- ── TESTIMONIALS ──────────────────────────────────── -->
+<div class="testimonials-section">
+  <div class="testimonials-label">💬 Loved by pet parents in beta</div>
+  <div class="testimonials-inner">
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"PetFolio is the first app that made me feel like I'm truly taking care of Biscuit the right way. The streak feature is addictive in the best way!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🐕</div>
+        <div>
+          <div class="testi-name">Emma R.</div>
+          <div class="testi-pet">Golden Retriever mom</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Found a playdate for my anxious rescue cat through the matching feature. They're best friends now. I cried happy tears — I can't recommend this enough."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🐈</div>
+        <div>
+          <div class="testi-name">James T.</div>
+          <div class="testi-pet">Rescue cat parent</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The nutrition tracker helped me realise I was overfeeding Clover. Within 3 weeks she had way more energy and her vet actually noticed the difference!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🐇</div>
+        <div>
+          <div class="testi-name">Priya K.</div>
+          <div class="testi-pet">Rabbit &amp; guinea pig mom</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ── BENTO 1: CARE STREAKS & DASHBOARD ─────────────── -->
 <section class="section care-section" id="care">
   <div class="section-inner">
@@ -1585,9 +1721,9 @@
       <span class="sec-eyebrow" style="background:rgba(255,158,125,.14);color:#C97B55;border:1px solid rgba(255,158,125,.28)">
         🔥 Care &amp; Streaks
       </span>
-      <h2 class="sec-headline">Build daily habits.<br>Earn your streak.</h2>
+      <h2 class="sec-headline">Never miss a moment<br>with your best friend.</h2>
       <p class="sec-body">
-        Turn routine pet care into a rewarding daily practice. Log meals, walks, and grooming — then watch your streak grow. PetFolio celebrates every day you show up for your pet.
+        Turn routine pet care into something you both look forward to. Log meals, walks, and grooming — then watch your streak grow. Every check-in is a little love letter to your pet.
       </p>
     </div>
 
@@ -1620,7 +1756,7 @@
         </div>
         <div>
           <div class="ring-info-title">7 day streak 🔥</div>
-          <div class="ring-info-sub">3 of 3 tasks complete today<br>Keep the momentum going!</div>
+          <div class="ring-info-sub">Montu's all taken care of today!<br>Keep the momentum going! 💪</div>
         </div>
       </div>
 
@@ -1673,9 +1809,9 @@
       <span class="sec-eyebrow" style="background:rgba(91,169,154,.12);color:#3D8A7D;border:1px solid rgba(91,169,154,.22)">
         🥩 Smart Nutrition
       </span>
-      <h2 class="sec-headline">Science-backed<br>nutrition tracking.</h2>
+      <h2 class="sec-headline">Feed them right.<br>Every single day.</h2>
       <p class="sec-body">
-        PetFolio calculates ideal daily intake using NRC metabolic energy requirements — calibrated to your pet's exact weight, species, and activity level. Every gram logged, every trend visible.
+        Great nutrition is the foundation of a long, happy life. PetFolio uses NRC metabolic science to give your furry (or scaly) family member exactly what they need — no guesswork, ever.
       </p>
     </div>
 
@@ -1775,9 +1911,9 @@
       <span class="sec-eyebrow" style="background:rgba(255,158,125,.12);color:#C97B55;border:1px solid rgba(255,158,125,.26)">
         🐾 Discover &amp; Match
       </span>
-      <h2 class="sec-headline">Find the perfect<br>playdate match.</h2>
+      <h2 class="sec-headline">Your pet deserves<br>a social life too.</h2>
       <p class="sec-body">
-        Explore nearby pets that fit your animal's energy and personality. Filter by distance, breed, and activity level — then swipe to connect with like-minded pet parents in your neighborhood.
+        Whether your dog wants to chase, your cat wants a cosy nap buddy, or your gecko just wants some company — PetFolio finds the perfect match nearby. Swipe, connect, and let the friendship begin.
       </p>
       <div class="filter-chips">
         <span class="fchip fc-ora">📍 Distance</span>
@@ -1830,7 +1966,7 @@
       </span>
       <h2 class="sec-headline" style="margin-top:10px">Your pet's public profile<br>&amp; your seller dashboard.</h2>
       <p class="sec-body" style="margin:12px auto 0;text-align:center;max-width:520px">
-        Share Montu's journey with the community and run your own pet-goods shop — all from one unified platform.
+        Montu has his own corner of the internet now. Share milestone moments, grow a following of fellow pet lovers, and sell your handmade pet goods — all in one place.
       </p>
     </div>
 
@@ -1940,10 +2076,10 @@
       <span class="eyebrow-dot" style="background:rgba(255,255,255,.7)"></span>
       Limited beta spots remaining
     </div>
-    <h2 class="final-headline">Give your pet the life<br>they deserve.</h2>
+    <h2 class="final-headline">Your pet is waiting for you<br>to make the first move.</h2>
     <p class="final-sub">
-      Join thousands of pet parents on the waitlist.<br>
-      Beta users get premium features — free, forever.
+      Over 847 pet parents have already secured their spot.<br>
+      Beta members get lifetime premium — because they believed first.
     </p>
     <div class="final-btns">
       <a class="final-btn" href="#waitlist">🐾 &nbsp;Join the waitlist</a>
@@ -1964,7 +2100,7 @@
     <li><a href="#">Contact</a></li>
     <li><a href="#">petfolio.social</a></li>
   </ul>
-  <div class="footer-copy">© 2025 PetFolio. Made with 🐾 for pet parents everywhere.</div>
+  <div class="footer-copy">© 2025 PetFolio. Made with ❤️ for pet parents everywhere.</div>
 </footer>
 
 <script>
