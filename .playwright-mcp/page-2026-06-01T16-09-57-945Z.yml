@@ -1,0 +1,408 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "PetFolio home" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - img [ref=e5]
+      - generic [ref=e11]:
+        - text: PetFolio
+        - generic [ref=e12]: Beta Waitlist
+    - generic [ref=e13]:
+      - generic [ref=e14]: 🔥 Spots filling fast
+      - button "Switch to dark mode" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+      - link "Join Now" [ref=e18] [cursor=pointer]:
+        - /url: "#waitlist"
+  - generic [ref=e19]:
+    - img
+    - generic [ref=e20]:
+      - generic [ref=e21]: Beta Waitlist is Open
+      - heading "Your pet's world, beautifully organised." [level=1] [ref=e23]:
+        - text: Your pet's world,
+        - emphasis [ref=e24]: beautifully
+        - text: organised.
+      - paragraph [ref=e25]: One app for care tracking, social sharing, playdates, shopping & health records. Built for pet parents who want more than a reminder tool.
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: Your name
+            - textbox "Your name" [ref=e31]:
+              - /placeholder: Alex
+          - generic [ref=e32]:
+            - generic [ref=e33]: How many pets?
+            - generic [ref=e34]:
+              - combobox "How many pets?" [ref=e35] [cursor=pointer]:
+                - option "1 pet" [selected]
+                - option "2 pets"
+                - option "3 pets"
+                - option "4+ pets"
+              - text: ▾
+          - generic [ref=e36]:
+            - generic [ref=e37]: What kind of pet?
+            - generic [ref=e38]:
+              - combobox "What kind of pet?" [ref=e39] [cursor=pointer]:
+                - option "Choose your pet type" [selected]
+                - option "🐶 Dog"
+                - option "🐱 Cat"
+                - option "🐦 Bird"
+                - option "🐰 Rabbit"
+                - option "🐠 Fish"
+                - option "🦎 Reptile"
+                - option "🐾 Other"
+              - text: ▾
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: Email address
+            - textbox "Email address" [ref=e43]:
+              - /placeholder: you@example.com
+          - button "Join Waitlist" [ref=e44] [cursor=pointer]:
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - text: Join Waitlist
+      - generic "Social proof" [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: 🐶
+          - generic [ref=e52]: 🐱
+          - generic [ref=e53]: 🐠
+          - generic [ref=e54]: 🐰
+          - generic [ref=e55]: 🐦
+        - paragraph [ref=e56]: 0 pet parents already joined
+    - generic [ref=e58]:
+      - generic:
+        - generic: 🐾
+        - text: Pets
+      - generic:
+        - generic: ⭐
+        - text: Care
+      - generic:
+        - generic: 🛒
+        - text: Market
+      - generic:
+        - generic: 💜
+        - text: Match
+      - generic:
+        - generic: 💖
+        - text: Social
+      - generic: 🔥 7-day streak
+      - generic: ⭐ +482 XP
+  - generic [ref=e60]:
+    - generic [ref=e61]: Five modules
+    - heading "One home for every pet moment." [level=2] [ref=e62]:
+      - text: One home for
+      - emphasis [ref=e63]: every pet moment.
+    - paragraph [ref=e64]: From morning meals to monthly vet visits — PetFolio weaves five powerful tools into one warm, intuitive experience.
+    - generic [ref=e65]:
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - generic [ref=e69]: 🐾
+          - generic [ref=e70]: Home & Pets
+          - generic [ref=e71]: Your daily command centre. See today's quests, streaks, recent moments and your whole pack at a glance.
+          - generic [ref=e72]: Pets Pillar
+        - generic [ref=e74]:
+          - generic [ref=e76]:
+            - text: Mochi is feeling
+            - emphasis [ref=e77]: cuddly today.
+          - generic [ref=e78]:
+            - generic [ref=e79]: 🔥
+            - generic [ref=e80]:
+              - generic [ref=e81]: 7-Day Streak
+              - generic [ref=e82]: Keep it up!
+            - generic [ref=e83]: +10 XP
+          - generic [ref=e84]:
+            - generic [ref=e85]: ✅
+            - generic [ref=e86]:
+              - generic [ref=e87]: Morning meal
+              - generic [ref=e88]: Done at 8:00 AM
+            - generic [ref=e89]: Done
+          - generic [ref=e90]:
+            - generic [ref=e91]: 💊
+            - generic [ref=e92]:
+              - generic [ref=e93]: Heartworm pill
+              - generic [ref=e94]: Due 12:00 PM
+            - generic [ref=e95]: +20 XP
+      - generic [ref=e96]:
+        - generic [ref=e97]: ⭐
+        - generic [ref=e98]: Care & Quests
+        - generic [ref=e99]: Gamified daily routines with XP, streaks and achievement badges. Pet care made genuinely rewarding.
+        - generic [ref=e100]: Care Pillar
+        - generic [ref=e101]:
+          - generic [ref=e103]: LV 7 · Caretaker
+          - generic [ref=e104]:
+            - generic [ref=e105]: 🦴
+            - generic [ref=e106]:
+              - generic [ref=e107]: Breakfast
+              - generic [ref=e108]: 8:00 AM
+            - generic [ref=e109]: ✓
+          - generic [ref=e110]:
+            - generic [ref=e111]: 🚶
+            - generic [ref=e112]:
+              - generic [ref=e113]: Evening walk
+              - generic [ref=e114]: 5:30 PM
+            - generic [ref=e115]: +15 XP
+      - generic [ref=e116]:
+        - generic [ref=e117]: 💖
+        - generic [ref=e118]: Social
+        - generic [ref=e119]: Share moments, follow the pets you love, and build a community around your furry family.
+        - generic [ref=e120]: Social Pillar
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - generic [ref=e123]: 🛁
+            - generic [ref=e124]:
+              - generic [ref=e125]: Bath day vibes ✨
+              - generic [ref=e126]: "@mochi · 42 likes"
+          - generic [ref=e127]:
+            - generic [ref=e128]: 🌳
+            - generic [ref=e129]:
+              - generic [ref=e130]: Park run!
+              - generic [ref=e131]: "@tommy · 88 likes"
+          - generic [ref=e132]:
+            - generic [ref=e133]: 💤
+            - generic [ref=e134]:
+              - generic [ref=e135]: Napping champion
+              - generic [ref=e136]: "@nori · 19 likes"
+      - generic [ref=e137]:
+        - generic [ref=e138]: 💜
+        - generic [ref=e139]: Match
+        - generic [ref=e140]: Find playdate partners and pet pals nearby. Swipe, match and schedule a meet-up in seconds.
+        - generic [ref=e141]: Match Pillar
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]: 🐕
+            - generic [ref=e145]:
+              - generic [ref=e146]: Biscuit · Corgi · 3y
+              - generic [ref=e147]: 0.4 km away
+            - generic [ref=e148]: ❤️
+          - generic [ref=e149]:
+            - generic [ref=e150]: 🐕
+            - generic [ref=e151]:
+              - generic [ref=e152]: Beans · Husky · 5y
+              - generic [ref=e153]: 1.2 km away
+            - generic [ref=e154]: 👋
+      - generic [ref=e155]:
+        - generic [ref=e156]: 🛒
+        - generic [ref=e157]: Market
+        - generic [ref=e158]: Curated treats, toys and accessories — all matched to your pet's profile. Smart shopping, every time.
+        - generic [ref=e159]: Market Pillar
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]: 🦴
+            - generic [ref=e163]:
+              - generic [ref=e164]: Salmon Crunchies
+              - generic [ref=e165]: WoofKitchen · ★4.9
+            - generic [ref=e166]: $12.50
+          - generic [ref=e167]:
+            - generic [ref=e168]: 🛏️
+            - generic [ref=e169]:
+              - generic [ref=e170]: Floofy Bed · M
+              - generic [ref=e171]: CloudPet · ★4.8
+            - generic [ref=e172]: $48
+  - generic [ref=e175]:
+    - generic [ref=e176]:
+      - generic [ref=e177]: Why PetFolio
+      - heading "Built around your pet, not around features." [level=2] [ref=e178]:
+        - text: Built around
+        - emphasis [ref=e179]: your pet,
+        - text: not around features.
+      - paragraph [ref=e180]: We started because every other app asked you to adapt to it. PetFolio learns your pet's routines and puts the things that matter front and centre.
+      - list [ref=e181]:
+        - listitem [ref=e182]:
+          - generic [ref=e183]: 🔥
+          - generic [ref=e184]:
+            - heading "Streak-based care tracking" [level=4] [ref=e185]
+            - paragraph [ref=e186]: Duolingo-style daily quests make feeding, walking and vet reminders feel rewarding rather than guilt-inducing.
+        - listitem [ref=e187]:
+          - generic [ref=e188]: 📊
+          - generic [ref=e189]:
+            - heading "Smart health timeline" [level=4] [ref=e190]
+            - paragraph [ref=e191]: Every vaccination, vet visit and medication logged in one beautiful timeline — shareable with your vet in seconds.
+        - listitem [ref=e192]:
+          - generic [ref=e193]: 🤝
+          - generic [ref=e194]:
+            - heading "Neighbourhood pet network" [level=4] [ref=e195]
+            - paragraph [ref=e196]: Find nearby pet owners, organise playdates and build real friendships around your mutual love for animals.
+        - listitem [ref=e197]:
+          - generic [ref=e198]: 🛒
+          - generic [ref=e199]:
+            - heading "Profile-aware marketplace" [level=4] [ref=e200]
+            - paragraph [ref=e201]: Recommendations filtered by your pet's species, breed, age and dietary needs — not just generic bestsellers.
+    - generic [ref=e205]:
+      - generic [ref=e206]:
+        - generic [ref=e207]: Caring for Mochi 🐱
+        - generic [ref=e208]:
+          - text: Level 7
+          - emphasis [ref=e209]: Caretaker
+        - generic [ref=e212]: 482 / 600 XP
+      - generic [ref=e213]:
+        - generic [ref=e214]: Today's Quests
+        - generic [ref=e215]:
+          - generic [ref=e216]:
+            - generic [ref=e217]: ✅
+            - generic [ref=e218]:
+              - generic [ref=e219]: Breakfast
+              - generic [ref=e220]: 8:00 AM
+            - generic [ref=e221]: +10 XP
+          - generic [ref=e222]:
+            - generic [ref=e223]: 💊
+            - generic [ref=e224]:
+              - generic [ref=e225]: Heartworm pill
+              - generic [ref=e226]: Due 12:00 PM
+            - generic [ref=e227]: +20 XP
+          - generic [ref=e228]:
+            - generic [ref=e229]: 🚶
+            - generic [ref=e230]:
+              - generic [ref=e231]: Evening walk
+              - generic [ref=e232]: 5:30 PM
+            - generic [ref=e233]: +15 XP
+        - generic [ref=e234]: Badges
+        - generic [ref=e235]:
+          - generic [ref=e236]: 🔥
+          - generic [ref=e237]: 🏥
+          - generic [ref=e238]: 🎓
+  - generic [ref=e240]:
+    - generic [ref=e241]: Beta Perks
+    - heading "Early birds get the good stuff." [level=2] [ref=e242]:
+      - text: Early birds get
+      - emphasis [ref=e243]: the good stuff.
+    - paragraph [ref=e244]: Join before launch and lock in exclusive founding-member benefits that won't be available after we ship.
+    - generic [ref=e245]:
+      - generic [ref=e246]:
+        - generic [ref=e247]: 🚀
+        - generic [ref=e248]: First Access
+        - paragraph [ref=e249]: Be among the first 500 people to use PetFolio. Get invited before anyone else.
+      - generic [ref=e250]:
+        - generic [ref=e251]: 🏅
+        - generic [ref=e252]: Founding Badge
+        - paragraph [ref=e253]: A permanent "Founding Member" badge on your profile — visible to every future user.
+      - generic [ref=e254]:
+        - generic [ref=e255]: 💬
+        - generic [ref=e256]: Shape the App
+        - paragraph [ref=e257]: Direct line to the founders. Your feedback shapes features before they ship to everyone.
+      - generic [ref=e258]:
+        - generic [ref=e259]: 🎁
+        - generic [ref=e260]: Lifetime Discount
+        - paragraph [ref=e261]: Lock in a founding-member rate that's yours to keep, forever — even as pricing evolves.
+  - generic [ref=e263]:
+    - generic [ref=e264]: By the numbers
+    - heading "Pet parents are already waiting." [level=2] [ref=e265]:
+      - text: Pet parents are
+      - text: already waiting.
+    - paragraph [ref=e266]: The response has been incredible. Here's where we are.
+    - generic [ref=e267]:
+      - generic [ref=e268]:
+        - generic [ref=e269]: "0"
+        - text: Waitlist Spots
+      - generic [ref=e270]:
+        - generic [ref=e271]: "0"
+        - text: App Modules
+      - generic [ref=e272]:
+        - generic [ref=e273]: "0"
+        - text: Pet Species
+    - generic [ref=e274]:
+      - generic [ref=e275]:
+        - generic [ref=e276]: ★★★★★
+        - paragraph [ref=e277]: "\"Finally an app that treats my cats like the main characters they are. The care tracking alone is worth it.\""
+        - generic [ref=e278]:
+          - generic [ref=e279]: 😺
+          - generic [ref=e280]:
+            - generic [ref=e281]: Sara K.
+            - generic [ref=e282]: 2 cats · London
+      - generic [ref=e283]:
+        - generic [ref=e284]: ★★★★★
+        - paragraph [ref=e285]: "\"The streak system is genuinely addictive. My dog's care routine has never been more consistent.\""
+        - generic [ref=e286]:
+          - generic [ref=e287]: 🐕
+          - generic [ref=e288]:
+            - generic [ref=e289]: James T.
+            - generic [ref=e290]: 1 dog · New York
+      - generic [ref=e291]:
+        - generic [ref=e292]: ★★★★★
+        - paragraph [ref=e293]: "\"The Match feature for playdates is such a good idea. Met three dog owners in my neighbourhood already.\""
+        - generic [ref=e294]:
+          - generic [ref=e295]: 🐾
+          - generic [ref=e296]:
+            - generic [ref=e297]: Priya M.
+            - generic [ref=e298]: 1 dog · Toronto
+  - generic [ref=e300]:
+    - img
+    - generic [ref=e301]: Limited beta spots remaining
+    - heading "Don't make your pet wait for the best app." [level=2] [ref=e303]:
+      - text: Don't make your pet
+      - text: wait for
+      - emphasis [ref=e304]: the best app.
+    - paragraph [ref=e305]: Spots are limited. Join the waitlist today and we'll let you know the moment PetFolio is ready for you.
+    - generic [ref=e306]:
+      - textbox "Email address" [ref=e307]:
+        - /placeholder: your@email.com
+      - button "Get Early Access" [ref=e308] [cursor=pointer]:
+        - generic [ref=e309]: Get Early Access
+    - paragraph [ref=e310]
+  - contentinfo [ref=e311]:
+    - generic [ref=e312]:
+      - generic [ref=e313]:
+        - generic [ref=e314]:
+          - img [ref=e316]
+          - generic [ref=e322]: PetFolio
+        - paragraph [ref=e323]: Built for devoted pet parents who believe their animals deserve the best — starting with the app they use every day.
+        - generic "Social links" [ref=e324]:
+          - link "Instagram" [ref=e325] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e326]
+          - link "TikTok" [ref=e329] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e330]
+          - link "Twitter / X" [ref=e332] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e333]
+      - generic [ref=e335]:
+        - generic [ref=e336]: Product
+        - list [ref=e337]:
+          - listitem [ref=e338]:
+            - link "Features" [ref=e339] [cursor=pointer]:
+              - /url: "#modules"
+          - listitem [ref=e340]:
+            - link "Beta Perks" [ref=e341] [cursor=pointer]:
+              - /url: "#perks"
+          - listitem [ref=e342]:
+            - link "Testimonials" [ref=e343] [cursor=pointer]:
+              - /url: "#proof"
+          - listitem [ref=e344]:
+            - link "Join Waitlist" [ref=e345] [cursor=pointer]:
+              - /url: "#waitlist"
+      - generic [ref=e346]:
+        - generic [ref=e347]: Modules
+        - list [ref=e348]:
+          - listitem [ref=e349]:
+            - link "Home & Pets" [ref=e350] [cursor=pointer]:
+              - /url: "#modules"
+          - listitem [ref=e351]:
+            - link "Care & Quests" [ref=e352] [cursor=pointer]:
+              - /url: "#modules"
+          - listitem [ref=e353]:
+            - link "Social" [ref=e354] [cursor=pointer]:
+              - /url: "#modules"
+          - listitem [ref=e355]:
+            - link "Match" [ref=e356] [cursor=pointer]:
+              - /url: "#modules"
+          - listitem [ref=e357]:
+            - link "Market" [ref=e358] [cursor=pointer]:
+              - /url: "#modules"
+      - generic [ref=e359]:
+        - generic [ref=e360]: Legal
+        - list [ref=e361]:
+          - listitem [ref=e362]:
+            - link "Privacy Policy" [ref=e363] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e364]:
+            - link "Terms of Use" [ref=e365] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e366]:
+            - link "Cookie Policy" [ref=e367] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e368]:
+            - link "Unsubscribe" [ref=e369] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=e370]:
+      - generic [ref=e371]: © 2025 PetFolio · All rights reserved · petfolio.social
+      - generic [ref=e372]:
+        - generic [ref=e373]: 🐾
+        - generic [ref=e374]: 🐾
+        - generic [ref=e375]: 🐾

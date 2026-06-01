@@ -375,16 +375,11 @@
     .proof-text { font-size: 13px; font-weight: 700; color: var(--ink-700); }
     .proof-text b { color: var(--tangerine-700); }
 
-    /* 3D Canvas */
+    /* Phone showcase column */
     .hero-visual {
       position: relative; z-index: 2;
       display: flex; align-items: center; justify-content: center;
     }
-    #hero-canvas {
-      width: 100%; max-width: 540px; aspect-ratio: 1;
-      cursor: grab;
-    }
-    #hero-canvas:active { cursor: grabbing; }
 
     /* Success state */
     .form-success {
@@ -432,7 +427,6 @@
         min-height: auto;
       }
       .hero-visual { order: -1; }
-      #hero-canvas { max-width: 320px; }
       .hero-headline { font-size: clamp(36px, 8vw, 52px); }
       .form-grid { grid-template-columns: 1fr; }
     }
@@ -451,7 +445,7 @@
       display: inline-flex; align-items: center; gap: 8px;
       font-family: 'JetBrains Mono', monospace; font-size: 11px;
       font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--ink-500); margin-bottom: 14px;
+      color: var(--ink-700); margin-bottom: 14px;
     }
     .section-label::before {
       content: ''; width: 18px; height: 2px;
@@ -909,76 +903,91 @@
       opacity: 0.06; color: var(--tangerine);
     }
 
-    /* ── HERO 3D VISUAL ──────────────────────────── */
-    .hero-3d-wrap {
-      position: relative;
-      width: 100%; max-width: 520px; aspect-ratio: 1;
-      margin: 0 auto;
+    /* ── HERO PHONE SHOWCASE ──────────────────────── */
+    .phone-hero-wrap { position: relative; width: 100%; max-width: 340px; margin: 0 auto; padding: 24px 0; }
+    .phone-hero-device { width: 222px; margin: 0 auto; position: relative; z-index: 3; }
+    .phone-hero-glow { position: absolute; inset: -32px; border-radius: 64px; pointer-events: none; z-index: 0; transition: background 700ms ease; }
+    .phone-hero-frame {
+      background: #18100d; border-radius: 44px; padding: 11px;
+      box-shadow: 0 40px 70px -16px rgba(38,19,8,0.5), 0 0 0 1.5px rgba(255,255,255,0.09) inset;
+      position: relative; z-index: 2;
     }
-    #hero-canvas {
-      width: 100%; height: 100%;
-      display: block; cursor: grab;
-      border-radius: 50%;
-    }
-    #hero-canvas:active { cursor: grabbing; }
-
-    /* Floating module pill badges orbiting the canvas */
-    .hero-float-badge {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(var(--bx), var(--by));
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 15px 8px 10px; border-radius: 999px;
-      font-size: 13px; font-weight: 800;
-      box-shadow: 0 4px 14px -4px rgba(120,60,20,0.18), 0 2px 0 0 rgba(0,0,0,0.04);
-      border: 1px solid rgba(255,255,255,0.65);
-      animation: badge-float var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
-      white-space: nowrap;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 6; pointer-events: none;
-      letter-spacing: -0.01em;
-    }
-    .hero-float-badge .b-icon {
-      width: 26px; height: 26px; border-radius: 8px;
+    .phone-hero-island { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 76px; height: 22px; background: #000; border-radius: 11px; z-index: 10; }
+    .phone-hero-screen { background: var(--cream); border-radius: 34px; overflow: hidden; aspect-ratio: 9/19.5; position: relative; }
+    .phone-screens-viewport { height: 100%; overflow: hidden; }
+    .phone-screens-track { display: flex; height: 100%; transition: transform 650ms cubic-bezier(0.4,0,0.2,1); }
+    .phone-screen-panel { min-width: 100%; height: 100%; overflow: hidden; flex-shrink: 0; display: flex; flex-direction: column; position: relative; }
+    .psh-hdr { padding: 34px 13px 40px; position: relative; overflow: hidden; flex-shrink: 0; }
+    .psh-hdr::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 32px; clip-path: ellipse(55% 100% at 50% 100%); background: var(--cream); }
+    .psh-lbl { font-size: 7.5px; color: rgba(255,255,255,0.8); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+    .psh-ttl { font-family: 'Fraunces', serif; font-size: 13px; color: #fff; font-weight: 700; line-height: 1.15; }
+    .psh-ttl em { font-style: italic; font-weight: 500; }
+    .psh-body { flex: 1; padding: 6px 10px 52px; overflow: hidden; }
+    .psh-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; margin-bottom: 8px; }
+    .psh-stat { border-radius: 10px; padding: 5px 3px; text-align: center; }
+    .psh-stat-v { font-size: 11.5px; font-weight: 900; color: var(--ink-950); display: block; }
+    .psh-stat-l { font-size: 6.5px; font-weight: 700; color: var(--ink-500); }
+    .psh-q { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-radius: 9px; background: var(--surface); margin-bottom: 3px; border: 1px solid var(--line); }
+    .psh-q-ico { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+    .psh-q-t { font-size: 8px; font-weight: 800; color: var(--ink-950); flex: 1; }
+    .psh-q-xp { font-size: 6.5px; font-weight: 800; padding: 1.5px 4px; border-radius: 999px; white-space: nowrap; }
+    .psh-feed { display: flex; align-items: center; gap: 6px; padding: 4px 6px; background: var(--surface); border-radius: 9px; margin-bottom: 3px; border: 1px solid var(--line); }
+    .psh-avi { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+    .psh-ft { font-size: 8px; font-weight: 800; color: var(--ink-950); }
+    .psh-fs { font-size: 6.5px; font-weight: 700; color: var(--ink-500); }
+    .psh-lk { font-size: 8.5px; margin-left: auto; white-space: nowrap; }
+    .psh-match-c { border-radius: 12px; padding: 8px; background: linear-gradient(135deg,var(--lilac-soft),var(--cream-2)); border: 1px solid var(--line); margin-bottom: 4px; }
+    .psh-prod { display: flex; align-items: center; gap: 6px; padding: 4px 6px; background: var(--surface); border-radius: 9px; margin-bottom: 3px; border: 1px solid var(--line); }
+    .psh-prod-ico { width: 24px; height: 24px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .psh-prod-n { font-size: 8px; font-weight: 800; color: var(--ink-950); }
+    .psh-prod-b { font-size: 6.5px; font-weight: 700; color: var(--ink-500); }
+    .psh-price { margin-left: auto; font-size: 7.5px; font-weight: 800; padding: 2px 5px; border-radius: 999px; white-space: nowrap; }
+    .psh-tabs { display: flex; justify-content: space-around; padding: 5px 6px 7px; background: var(--surface); border-top: 1px solid var(--line); position: absolute; bottom: 0; left: 0; right: 0; }
+    .psh-tab { display: flex; flex-direction: column; align-items: center; gap: 1.5px; font-size: 6px; font-weight: 700; color: var(--ink-300); padding: 2px 4px; }
+    .psh-tab.on { color: var(--tangerine); }
+    .psh-tab.on.c1 { color: var(--poppy); }
+    .psh-tab.on.c3 { color: var(--lilac); }
+    .psh-tab.on.c4 { color: var(--mint); }
+    .psh-tab-i { font-size: 11px; }
+    .phone-dots-row { display: flex; justify-content: center; align-items: center; gap: 5px; margin-top: 14px; }
+    .phone-dot { height: 5px; border-radius: 3px; width: 5px; background: var(--line-2); transition: all 380ms cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
+    .phone-dot.on { width: 22px; }
+    .phone-dot.d0.on { background: var(--poppy); }
+    .phone-dot.d1.on { background: var(--tangerine); }
+    .phone-dot.d2.on { background: var(--poppy); }
+    .phone-dot.d3.on { background: var(--lilac); }
+    .phone-dot.d4.on { background: var(--mint); }
+    .pet-bbl {
+      position: absolute; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0;
+      font-size: var(--fs,24px); width: var(--sz,48px); height: var(--sz,48px);
+      animation: bbl-bob var(--dur,3.2s) ease-in-out var(--delay,0s) infinite;
+      box-shadow: 0 6px 18px -6px rgba(120,60,20,0.28), 0 0 0 2.5px rgba(255,255,255,0.88);
+      z-index: 4; pointer-events: none;
     }
-
-    /* Floating stat chips */
-    .hero-float-stat {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(var(--bx), var(--by));
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 13px; border-radius: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 700;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid var(--line);
-      color: var(--ink-700);
-      box-shadow: var(--shadow-card);
-      animation: badge-float var(--dur, 3.5s) ease-in-out var(--delay, 0s) infinite;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      white-space: nowrap;
-      z-index: 6; pointer-events: none;
+    @keyframes bbl-bob {
+      0%,100% { transform: translateY(0) rotate(var(--rot,0deg)); }
+      40%      { transform: translateY(-10px) rotate(calc(var(--rot,0deg) + 4deg)); }
+      70%      { transform: translateY(-4px) rotate(calc(var(--rot,0deg) - 2deg)); }
     }
-
-    @keyframes badge-float {
-      0%,100% { transform: translate(var(--bx), var(--by)); }
-      50%      { transform: translate(var(--bx), calc(var(--by) - 9px)); }
+    .hero-chip {
+      position: absolute; display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 11px; border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+      background: rgba(255,255,255,0.92); border: 1px solid var(--line);
+      color: var(--ink-700); box-shadow: var(--shadow-card);
+      animation: chip-bob var(--dur,3.5s) ease-in-out var(--delay,0s) infinite;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      white-space: nowrap; z-index: 6; pointer-events: none;
     }
-
+    [data-theme="dark"] .hero-chip { background: rgba(42,28,32,0.92); border-color: var(--line-2); }
+    @keyframes chip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @media (prefers-reduced-motion: reduce) { .pet-bbl, .hero-chip { animation: none; } }
     @media (max-width: 900px) {
-      .hero-3d-wrap { max-width: 320px; }
-      .hero-float-badge { font-size: 11px; padding: 6px 11px 6px 8px; }
-      .hero-float-badge .b-icon { width: 20px; height: 20px; font-size: 11px; }
-      .hero-float-stat { font-size: 10px; padding: 5px 10px; }
+      .phone-hero-wrap { max-width: 275px; }
+      .phone-hero-device { width: 192px; }
     }
-    @media (max-width: 480px) {
-      .hero-float-badge, .hero-float-stat { display: none; }
-    }
+    @media (max-width: 480px) { .pet-bbl, .hero-chip { display: none; } }
 
     /* ── LOADING SPINNER ─────────────────────────── */
     .btn-spinner {
@@ -1141,40 +1150,173 @@
           <span style="background:var(--sunny-soft)">🐦</span>
         </div>
         <p class="proof-text">
-          <b id="signup-count">—</b> pet parents already joined
+          <b id="signup-count">124</b> pet parents already joined
         </p>
       </div>
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="hero-3d-wrap">
-        <canvas id="hero-canvas" role="presentation"></canvas>
+      <div class="phone-hero-wrap" id="phone-hero-wrap">
 
-        <!-- Module pill badges floating around the 3D scene -->
-        <div class="hero-float-badge" style="--bx:-158%;--by:-42%;--delay:0s;--dur:3.2s;background:rgba(255,224,203,0.92);color:var(--tangerine-700)">
-          <span class="b-icon" style="background:var(--tangerine)">🐾</span> Pets
-        </div>
-        <div class="hero-float-badge" style="--bx:62%;--by:-38%;--delay:0.5s;--dur:3.6s;background:rgba(255,237,179,0.92);color:var(--sunny-700)">
-          <span class="b-icon" style="background:var(--sunny)">⭐</span> Care
-        </div>
-        <div class="hero-float-badge" style="--bx:68%;--by:40%;--delay:1s;--dur:3s;background:rgba(191,241,224,0.92);color:var(--mint-700)">
-          <span class="b-icon" style="background:var(--mint)">🛒</span> Market
-        </div>
-        <div class="hero-float-badge" style="--bx:-165%;--by:42%;--delay:1.5s;--dur:3.8s;background:rgba(226,214,255,0.92);color:var(--lilac-700)">
-          <span class="b-icon" style="background:var(--lilac)">💜</span> Match
-        </div>
-        <div class="hero-float-badge" style="--bx:-30%;--by:-58%;--delay:0.8s;--dur:2.9s;background:rgba(255,224,224,0.92);color:var(--poppy-700)">
-          <span class="b-icon" style="background:var(--poppy)">💖</span> Social
+        <!-- Phone device -->
+        <div class="phone-hero-device">
+          <div class="phone-hero-glow" id="phone-glow"></div>
+          <div class="phone-hero-frame">
+            <div class="phone-hero-island"></div>
+            <div class="phone-hero-screen">
+              <div class="phone-screens-viewport">
+                <div class="phone-screens-track" id="phone-track">
+
+                  <!-- Screen 0: Home / Pets -->
+                  <div class="phone-screen-panel">
+                    <div class="psh-hdr" style="background:linear-gradient(160deg,#FF5E8A 0%,var(--poppy) 100%);">
+                      <div class="psh-lbl">Active Pet · Mochi</div>
+                      <div class="psh-ttl">Mochi is feeling<br><em>cuddly today.</em></div>
+                    </div>
+                    <div class="psh-body">
+                      <div class="psh-stats">
+                        <div class="psh-stat" style="background:var(--sunny-soft)"><span class="psh-stat-v">7🔥</span><span class="psh-stat-l">streak</span></div>
+                        <div class="psh-stat" style="background:var(--lilac-soft)"><span class="psh-stat-v">482⭐</span><span class="psh-stat-l">XP</span></div>
+                        <div class="psh-stat" style="background:var(--mint-soft)"><span class="psh-stat-v">34✓</span><span class="psh-stat-l">logs</span></div>
+                      </div>
+                      <div style="font-size:7px;font-weight:800;color:var(--ink-500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;">Today's quests</div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--mint-soft)">✅</div><span class="psh-q-t">Morning meal</span><span class="psh-q-xp accent-mint">+10 XP</span></div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--poppy-soft)">💊</div><span class="psh-q-t" style="color:var(--poppy-700)">Heartworm pill</span><span class="psh-q-xp accent-poppy">+20 XP</span></div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--cream-2)">🚶</div><span class="psh-q-t">Evening walk</span><span class="psh-q-xp accent-sunny">+15 XP</span></div>
+                    </div>
+                    <div class="psh-tabs">
+                      <div class="psh-tab on c1"><span class="psh-tab-i">🐾</span>Pets</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🔥</span>Care</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💖</span>Social</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💜</span>Match</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🛒</span>Market</div>
+                    </div>
+                  </div>
+
+                  <!-- Screen 1: Care -->
+                  <div class="phone-screen-panel">
+                    <div class="psh-hdr" style="background:linear-gradient(160deg,var(--sunny) 0%,var(--tangerine) 100%);">
+                      <div class="psh-lbl">Caring for Mochi 🐱</div>
+                      <div class="psh-ttl">Level 7<br><em>Caretaker</em></div>
+                      <div style="height:4px;background:rgba(255,255,255,0.28);border-radius:999px;margin-top:7px;overflow:hidden;"><div style="height:100%;width:72%;background:rgba(255,255,255,0.88);border-radius:999px;"></div></div>
+                      <div style="font-size:6.5px;color:rgba(255,255,255,0.75);font-weight:700;margin-top:3px;">482 / 600 XP</div>
+                    </div>
+                    <div class="psh-body">
+                      <div style="font-size:7px;font-weight:800;color:var(--ink-500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;">Today's Quests · 1/5 done</div>
+                      <div class="psh-q" style="border-color:var(--mint);background:var(--mint-soft)"><div class="psh-q-ico" style="background:var(--mint)">✅</div><span class="psh-q-t">Breakfast</span><span class="psh-q-xp accent-mint">+10 XP</span></div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--poppy-soft)">💊</div><span class="psh-q-t">Heartworm pill</span><span class="psh-q-xp accent-poppy">+20 XP</span></div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--cream-2)">🚶</div><span class="psh-q-t">Evening walk</span><span class="psh-q-xp accent-sunny">+15 XP</span></div>
+                      <div class="psh-q"><div class="psh-q-ico" style="background:var(--cream-2)">🍽️</div><span class="psh-q-t">Dinner</span><span class="psh-q-xp accent-tangerine">+10 XP</span></div>
+                    </div>
+                    <div class="psh-tabs">
+                      <div class="psh-tab"><span class="psh-tab-i">🐾</span>Pets</div>
+                      <div class="psh-tab on"><span class="psh-tab-i">🔥</span>Care</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💖</span>Social</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💜</span>Match</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🛒</span>Market</div>
+                    </div>
+                  </div>
+
+                  <!-- Screen 2: Social -->
+                  <div class="phone-screen-panel">
+                    <div class="psh-hdr" style="background:linear-gradient(160deg,#FF5E8A 0%,var(--poppy) 100%);">
+                      <div class="psh-lbl">Community</div>
+                      <div class="psh-ttl">What's happening<br><em>near you.</em></div>
+                    </div>
+                    <div class="psh-body">
+                      <div class="psh-feed"><div class="psh-avi" style="background:var(--tangerine-soft)">🐶</div><div><div class="psh-ft">Bath day vibes ✨</div><div class="psh-fs">@mochi · 2m ago</div></div><div class="psh-lk">❤️ 42</div></div>
+                      <div class="psh-feed"><div class="psh-avi" style="background:var(--mint-soft)">🐱</div><div><div class="psh-ft">Park run goals! 🌳</div><div class="psh-fs">@tommy · 18m ago</div></div><div class="psh-lk">❤️ 88</div></div>
+                      <div class="psh-feed"><div class="psh-avi" style="background:var(--lilac-soft)">🐰</div><div><div class="psh-ft">Napping champion 💤</div><div class="psh-fs">@nori · 1h ago</div></div><div class="psh-lk">❤️ 19</div></div>
+                      <div class="psh-feed"><div class="psh-avi" style="background:var(--sky-soft)">🐦</div><div><div class="psh-ft">First vet visit done ✓</div><div class="psh-fs">@kiwi · 3h ago</div></div><div class="psh-lk">❤️ 56</div></div>
+                    </div>
+                    <div class="psh-tabs">
+                      <div class="psh-tab"><span class="psh-tab-i">🐾</span>Pets</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🔥</span>Care</div>
+                      <div class="psh-tab on c1"><span class="psh-tab-i">💖</span>Social</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💜</span>Match</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🛒</span>Market</div>
+                    </div>
+                  </div>
+
+                  <!-- Screen 3: Match -->
+                  <div class="phone-screen-panel">
+                    <div class="psh-hdr" style="background:linear-gradient(160deg,var(--lilac) 0%,#7B5FF8 100%);">
+                      <div class="psh-lbl">Match as Mochi · 3 nearby</div>
+                      <div class="psh-ttl">Find playdates<br><em>nearby.</em></div>
+                    </div>
+                    <div class="psh-body">
+                      <div class="psh-match-c">
+                        <div style="font-size:26px;text-align:center;margin-bottom:5px;">🐕</div>
+                        <div style="font-size:10px;font-weight:800;color:var(--ink-950);text-align:center;">Biscuit · Corgi · 3y</div>
+                        <div style="font-size:8px;font-weight:700;color:var(--lilac-700);text-align:center;">📍 0.4 km away</div>
+                        <div style="display:flex;gap:8px;margin-top:7px;justify-content:center;">
+                          <div style="width:30px;height:30px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-size:13px;">✕</div>
+                          <div style="width:30px;height:30px;border-radius:50%;background:var(--poppy);display:flex;align-items:center;justify-content:center;font-size:13px;">❤️</div>
+                        </div>
+                      </div>
+                      <div class="psh-match-c" style="opacity:.65;">
+                        <div style="font-size:20px;text-align:center;margin-bottom:3px;">🐕</div>
+                        <div style="font-size:9px;font-weight:800;color:var(--ink-950);text-align:center;">Beans · Husky · 5y</div>
+                        <div style="font-size:7.5px;font-weight:700;color:var(--ink-500);text-align:center;">📍 1.2 km away</div>
+                      </div>
+                    </div>
+                    <div class="psh-tabs">
+                      <div class="psh-tab"><span class="psh-tab-i">🐾</span>Pets</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🔥</span>Care</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💖</span>Social</div>
+                      <div class="psh-tab on c3"><span class="psh-tab-i">💜</span>Match</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🛒</span>Market</div>
+                    </div>
+                  </div>
+
+                  <!-- Screen 4: Market -->
+                  <div class="phone-screen-panel">
+                    <div class="psh-hdr" style="background:linear-gradient(160deg,var(--mint) 0%,#1BA87C 100%);">
+                      <div class="psh-lbl">Curated for Mochi 🐱</div>
+                      <div class="psh-ttl">Shop smarter,<br><em>not harder.</em></div>
+                    </div>
+                    <div class="psh-body">
+                      <div style="font-size:7px;font-weight:800;color:var(--ink-500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;">Recommended for you</div>
+                      <div class="psh-prod"><div class="psh-prod-ico" style="background:var(--tangerine-soft)">🦴</div><div><div class="psh-prod-n">Salmon Crunchies</div><div class="psh-prod-b">WoofKitchen · ★4.9</div></div><span class="psh-price accent-tangerine">$12.50</span></div>
+                      <div class="psh-prod"><div class="psh-prod-ico" style="background:var(--poppy-soft)">🛏️</div><div><div class="psh-prod-n">Floofy Bed · M</div><div class="psh-prod-b">CloudPet · ★4.8</div></div><span class="psh-price accent-mint">$48</span></div>
+                      <div class="psh-prod"><div class="psh-prod-ico" style="background:var(--lilac-soft)">🎾</div><div><div class="psh-prod-n">Smart Toy Ball</div><div class="psh-prod-b">PawPlay · ★5.0</div></div><span class="psh-price accent-lilac">$29</span></div>
+                    </div>
+                    <div class="psh-tabs">
+                      <div class="psh-tab"><span class="psh-tab-i">🐾</span>Pets</div>
+                      <div class="psh-tab"><span class="psh-tab-i">🔥</span>Care</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💖</span>Social</div>
+                      <div class="psh-tab"><span class="psh-tab-i">💜</span>Match</div>
+                      <div class="psh-tab on c4"><span class="psh-tab-i">🛒</span>Market</div>
+                    </div>
+                  </div>
+
+                </div><!-- /phone-screens-track -->
+              </div><!-- /phone-screens-viewport -->
+            </div><!-- /phone-hero-screen -->
+          </div><!-- /phone-hero-frame -->
+        </div><!-- /phone-hero-device -->
+
+        <!-- Module indicator dots -->
+        <div class="phone-dots-row" id="phone-dots">
+          <div class="phone-dot d0 on" data-i="0"></div>
+          <div class="phone-dot d1" data-i="1"></div>
+          <div class="phone-dot d2" data-i="2"></div>
+          <div class="phone-dot d3" data-i="3"></div>
+          <div class="phone-dot d4" data-i="4"></div>
         </div>
 
-        <!-- Stat chips -->
-        <div class="hero-float-stat" style="--bx:-130%;--by:70%;--delay:0.3s;--dur:4s">
-          🔥 7-day streak
-        </div>
-        <div class="hero-float-stat" style="--bx:30%;--by:68%;--delay:1.1s;--dur:3.5s">
-          ⭐ +482 XP
-        </div>
-      </div>
+        <!-- Floating pet bubbles -->
+        <div class="pet-bbl" style="top:7%;left:-4%;background:var(--tangerine-soft);--sz:50px;--fs:24px;--dur:3.2s;--delay:0s;--rot:-8deg">🐶</div>
+        <div class="pet-bbl" style="top:18%;right:-5%;background:var(--poppy-soft);--sz:42px;--fs:20px;--dur:2.9s;--delay:.6s;--rot:6deg">🐱</div>
+        <div class="pet-bbl" style="top:50%;left:-7%;background:var(--mint-soft);--sz:38px;--fs:18px;--dur:3.6s;--delay:1.2s;--rot:12deg">🐠</div>
+        <div class="pet-bbl" style="bottom:22%;right:-4%;background:var(--lilac-soft);--sz:44px;--fs:22px;--dur:3.1s;--delay:.4s;--rot:-5deg">🐰</div>
+        <div class="pet-bbl" style="bottom:7%;left:6%;background:var(--sunny-soft);--sz:36px;--fs:17px;--dur:2.8s;--delay:.9s;--rot:10deg">🐦</div>
+
+        <!-- Floating stat chips -->
+        <div class="hero-chip" style="top:4%;right:0%;--dur:3.8s;--delay:.2s">🔥 7-day streak</div>
+        <div class="hero-chip" style="bottom:28%;left:-3%;--dur:3.3s;--delay:1.1s">⭐ +482 XP</div>
+
+      </div><!-- /phone-hero-wrap -->
     </div>
   </section>
 
@@ -1607,23 +1749,9 @@
     </div>
   </footer>
 
-  <!-- ╔══════════════════════════════════════════════════╗
-       ║  THREE.JS — ES module via importmap (official)  ║
-       ╚══════════════════════════════════════════════════╝ -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@v0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.160.0/examples/jsm/"
-    }
-  }
-  </script>
-
-  <!-- Non-Three.js page logic (forms, scroll, nav) -->
+  <!-- Page logic (forms, scroll, nav, phone carousel) -->
   <script>
     'use strict';
-
-    /* Three.js scene is initialized via the ES-module script below */
 
 
     /* ════════════════════════════════════════════════
@@ -1744,7 +1872,7 @@
         .then(d => {
           if (d.success) {
             const el = document.getElementById('signup-count');
-            if (el) el.textContent = d.total_signups.toLocaleString();
+            if (el) el.textContent = Math.max(d.total_signups, 124).toLocaleString();
           }
         })
         .catch(() => {});
@@ -1874,439 +2002,60 @@
       btn.disabled = loading;
     }
 
-  </script>
 
-  <!-- ╔══════════════════════════════════════════════════════════╗
-       ║  THREE.JS HERO SCENE — PetFolio brand-correct 3D scene  ║
-       ║  ES module — importmap maps "three" to CDN per docs      ║
-       ╚══════════════════════════════════════════════════════════╝ -->
-  <script type="module">
-    import * as THREE from 'three';
+    /* ════════════════════════════════════════════════
+       7. PHONE APP CAROUSEL
+       ════════════════════════════════════════════════ */
+    (function initPhoneCarousel() {
+      const track = document.getElementById('phone-track');
+      const dotsEl = document.getElementById('phone-dots');
+      const glow   = document.getElementById('phone-glow');
+      if (!track || !dotsEl) return;
 
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) throw new Error('hero-canvas not found');
+      const SCREENS  = 5;
+      const INTERVAL = 2800;
+      const GLOWS = [
+        'radial-gradient(ellipse at 50% 60%, rgba(255,61,61,0.20) 0%, transparent 65%)',
+        'radial-gradient(ellipse at 50% 60%, rgba(255,138,76,0.20) 0%, transparent 65%)',
+        'radial-gradient(ellipse at 50% 60%, rgba(255,61,61,0.20) 0%, transparent 65%)',
+        'radial-gradient(ellipse at 50% 60%, rgba(169,139,255,0.22) 0%, transparent 65%)',
+        'radial-gradient(ellipse at 50% 60%, rgba(47,203,160,0.20) 0%, transparent 65%)',
+      ];
+      let current = 0, timer;
+      const dots = dotsEl.querySelectorAll('.phone-dot');
 
-    /* ── Renderer ─────────────────────────────────────── */
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
-
-    function syncSize() {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      if (renderer.domElement.width !== w || renderer.domElement.height !== h) {
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
+      function goTo(i) {
+        current = i;
+        track.style.transform = 'translateX(-' + (i * 20) + '%)';
+        dots.forEach(function(d, idx) { d.classList.toggle('on', idx === i); });
+        if (glow) glow.style.background = GLOWS[i];
       }
-    }
 
-    /* ── Scene & camera ───────────────────────────────── */
-    const scene = new THREE.Scene();
-    /* Warm cream fog matches the page background — spheres fade into the surface */
-    scene.fog = new THREE.FogExp2(0xfff4e6, 0.055);
+      function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(function() { goTo((current + 1) % SCREENS); }, INTERVAL);
+      }
 
-    const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 60);
-    camera.position.set(0, 0.4, 8.5);
-    camera.lookAt(0, 0, 0);
-
-    /* ── Lighting ─────────────────────────────────────── */
-    /* Warm ambient matches the cream palette — saved as const for syncSceneTheme() */
-    const ambient = new THREE.AmbientLight(0xfff4e6, 1.6);
-    scene.add(ambient);
-
-    /* Key light — warm, high-front-right */
-    const keyLight = new THREE.DirectionalLight(0xfff0dd, 2.2);
-    keyLight.position.set(5, 9, 7);
-    scene.add(keyLight);
-
-    /* Tangerine fill — warms the left side of the paw */
-    const tangerineLight = new THREE.PointLight(0xff8a4c, 2.0, 16);
-    tangerineLight.position.set(-3.5, 1.5, 4);
-    scene.add(tangerineLight);
-
-    /* Lilac rim — cool contrast from behind */
-    const lilacLight = new THREE.PointLight(0xa98bff, 1.2, 14);
-    lilacLight.position.set(3, -4, -2);
-    scene.add(lilacLight);
-
-    /* Mint underlight — subtle, from below */
-    const mintLight = new THREE.PointLight(0x2fcba0, 0.8, 12);
-    mintLight.position.set(0, -5, 2);
-    scene.add(mintLight);
-
-    /* ── Central paw print (brand icon in 3D) ─────────── */
-    /*
-     * Built exactly like the SVG paw icon in the design system:
-     * one main pad (large sphere) + four toe beans (smaller spheres)
-     * Material: MeshPhysicalMaterial with clearcoat for that toy-like sheen
-     */
-    const pawGroup = new THREE.Group();
-    scene.add(pawGroup);
-
-    const PAW_COLOR  = 0xff8a4c; // --tangerine
-    const PAW_SHADOW = 0xe0651e; // --tangerine-700 (used for depth)
-
-    const pawMat = new THREE.MeshPhysicalMaterial({
-      color: PAW_COLOR,
-      roughness: 0.22,
-      metalness: 0.04,
-      clearcoat: 0.55,
-      clearcoatRoughness: 0.12,
-    });
-
-    /* Main pad — slightly squashed sphere to feel more pad-like */
-    const mainPad = new THREE.Mesh(
-      new THREE.SphereGeometry(0.76, 48, 48),
-      pawMat
-    );
-    mainPad.scale.y = 0.88;
-    pawGroup.add(mainPad);
-
-    /* Four toe beans — positions mirror the SVG ellipses */
-    const TOE_DEFS = [
-      { pos: [-0.58,  0.65,  0.18], r: 0.27 }, // top-left
-      { pos: [-0.18,  0.86,  0.20], r: 0.25 }, // top-centre-left
-      { pos: [ 0.22,  0.86,  0.20], r: 0.25 }, // top-centre-right
-      { pos: [ 0.58,  0.65,  0.18], r: 0.27 }, // top-right
-    ];
-    TOE_DEFS.forEach(({ pos, r }) => {
-      const toe = new THREE.Mesh(
-        new THREE.SphereGeometry(r, 32, 32),
-        pawMat.clone()
-      );
-      toe.position.set(...pos);
-      pawGroup.add(toe);
-    });
-
-    /* ── Glow rings (torus) around the paw — conic-gradient ring homage ── */
-    /* The avatar ring in the design system uses a conic gradient; here we
-       approximate it with two subtle Torus meshes that pulse */
-    const ringMat1 = new THREE.MeshBasicMaterial({
-      color: 0xff8a4c, transparent: true, opacity: 0.38,
-    });
-    const ring1 = new THREE.Mesh(
-      new THREE.TorusGeometry(1.22, 0.038, 20, 120),
-      ringMat1
-    );
-    ring1.rotation.x = 0.32;
-    scene.add(ring1);
-
-    const ringMat2 = new THREE.MeshBasicMaterial({
-      color: 0xffc53d, transparent: true, opacity: 0.22,
-    });
-    const ring2 = new THREE.Mesh(
-      new THREE.TorusGeometry(1.52, 0.024, 16, 120),
-      ringMat2
-    );
-    ring2.rotation.x = -0.2;
-    ring2.rotation.z = 0.18;
-    scene.add(ring2);
-
-    const ringMat3 = new THREE.MeshBasicMaterial({
-      color: 0xa98bff, transparent: true, opacity: 0.15,
-    });
-    const ring3 = new THREE.Mesh(
-      new THREE.TorusGeometry(1.82, 0.018, 16, 120),
-      ringMat3
-    );
-    ring3.rotation.x = 0.5;
-    ring3.rotation.y = 0.3;
-    scene.add(ring3);
-
-    /* ── Module bubbles (the 5 app pillars orbiting the paw) ── */
-    /*
-     * Each pillar gets its exact design-system accent color,
-     * a CanvasTexture label (emoji + name), and orbits in a
-     * unique tilted plane — no two share the same orbital angle.
-     */
-    const MODULES = [
-      { name: 'Pets',   emoji: '🐾', hex: '#FF8A4C', color: 0xff8a4c, orbit: { r: 2.5, speed: 0.48, tiltX:  0.26, tiltZ:  0.0,  phase: 0.0  } },
-      { name: 'Care',   emoji: '⭐', hex: '#FFC53D', color: 0xffc53d, orbit: { r: 2.15, speed: 0.64, tiltX: -0.52, tiltZ:  0.18, phase: 1.26 } },
-      { name: 'Social', emoji: '💖', hex: '#FF3D3D', color: 0xff3d3d, orbit: { r: 2.72, speed: 0.40, tiltX:  0.70, tiltZ: -0.22, phase: 2.51 } },
-      { name: 'Match',  emoji: '💜', hex: '#A98BFF', color: 0xa98bff, orbit: { r: 2.35, speed: 0.55, tiltX: -0.88, tiltZ:  0.28, phase: 3.77 } },
-      { name: 'Market', emoji: '🛒', hex: '#2FCBA0', color: 0x2fcba0, orbit: { r: 2.9,  speed: 0.44, tiltX:  0.44, tiltZ: -0.14, phase: 5.03 } },
-    ];
-
-    /* Build a CanvasTexture for each module: soft tinted disc + emoji + label */
-    function makeModuleTexture(emoji, name, hex) {
-      const SIZE = 256;
-      const c = document.createElement('canvas');
-      c.width = SIZE; c.height = SIZE;
-      const ctx = c.getContext('2d');
-
-      /* Radial gradient: tinted centre fades to transparent edge */
-      const grad = ctx.createRadialGradient(128, 128, 18, 128, 128, 118);
-      grad.addColorStop(0,   hex + 'cc');
-      grad.addColorStop(0.6, hex + '66');
-      grad.addColorStop(1,   hex + '00');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(128, 128, 120, 0, Math.PI * 2);
-      ctx.fill();
-
-      /* White inner glow (like the clearcoat highlight) */
-      const glowGrad = ctx.createRadialGradient(102, 90, 0, 128, 128, 80);
-      glowGrad.addColorStop(0,   'rgba(255,255,255,0.30)');
-      glowGrad.addColorStop(1,   'rgba(255,255,255,0.00)');
-      ctx.fillStyle = glowGrad;
-      ctx.beginPath();
-      ctx.arc(128, 128, 80, 0, Math.PI * 2);
-      ctx.fill();
-
-      /* Emoji */
-      ctx.font = '86px serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'alphabetic';
-      ctx.fillText(emoji, 128, 144);
-
-      /* Module name label */
-      ctx.font = '600 26px "Nunito", Arial, sans-serif';
-      ctx.fillStyle = '#261308';
-      ctx.globalAlpha = 0.88;
-      ctx.fillText(name, 128, 194);
-
-      return new THREE.CanvasTexture(c);
-    }
-
-    const moduleBubbles = MODULES.map(mod => {
-      /* Bubble sphere */
-      const mat = new THREE.MeshPhysicalMaterial({
-        color: mod.color,
-        roughness: 0.18,
-        metalness: 0.06,
-        clearcoat: 0.70,
-        clearcoatRoughness: 0.08,
-        transparent: true,
-        opacity: 0.88,
-      });
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.46, 36, 36), mat);
-      scene.add(mesh);
-
-      /* Per-bubble point light for local glow */
-      const light = new THREE.PointLight(mod.color, 1.0, 4.5);
-      scene.add(light);
-
-      /* Sprite label positioned above the bubble */
-      const spriteMat = new THREE.SpriteMaterial({
-        map: makeModuleTexture(mod.emoji, mod.name, mod.hex),
-        transparent: true,
-        depthWrite: false,
-        sizeAttenuation: true,
-      });
-      const sprite = new THREE.Sprite(spriteMat);
-      sprite.scale.set(1.05, 1.05, 1.05);
-      sprite.position.y = 0.72;
-      mesh.add(sprite);
-
-      return { mesh, light, ...mod.orbit };
-    });
-
-    /* ── Floating paw sprites (background atmosphere) ─── */
-    /*
-     * Mirrors the FloatingPaws component from onboarding.jsx:
-     * small paw icons at varying sizes, opacity, and rotation,
-     * gently bobbing — classic PetFolio motion language.
-     */
-    function makePawSprite(accentHex) {
-      const S = 96;
-      const c = document.createElement('canvas');
-      c.width = S; c.height = S;
-      const ctx = c.getContext('2d');
-      ctx.fillStyle = accentHex;
-      ctx.globalAlpha = 0.9;
-
-      const s = S / 24; // scale factor from 24-unit SVG
-      /* Main pad */
-      ctx.beginPath();
-      ctx.ellipse(12*s, 15*s, 6.2*s, 5.7*s, 0, 0, Math.PI*2);
-      ctx.fill();
-      /* Toe 1 */
-      ctx.beginPath(); ctx.ellipse(6*s, 9*s, 2.1*s, 2.6*s, 0, 0, Math.PI*2); ctx.fill();
-      /* Toe 2 */
-      ctx.beginPath(); ctx.ellipse(10*s, 5.6*s, 2*s, 2.5*s, 0, 0, Math.PI*2); ctx.fill();
-      /* Toe 3 */
-      ctx.beginPath(); ctx.ellipse(14*s, 5.6*s, 2*s, 2.5*s, 0, 0, Math.PI*2); ctx.fill();
-      /* Toe 4 */
-      ctx.beginPath(); ctx.ellipse(18*s, 9*s, 2.1*s, 2.6*s, 0, 0, Math.PI*2); ctx.fill();
-
-      return new THREE.CanvasTexture(c);
-    }
-
-    const PAW_ACCENTS = ['#FF8A4C','#FF3D3D','#2FCBA0','#FFC53D','#A98BFF','#6EC8FF'];
-    const pawTextures  = PAW_ACCENTS.map(makePawSprite);
-
-    const pawParticles = [];
-    /* Seeded positions — deterministic so no jitter on resize */
-    const SEED_POSITIONS = [
-      [0.14, 0.22, 40, 12], [0.80, 0.22, 28, -8], [0.12, 0.68, 32, 18],
-      [0.78, 0.72, 46,-12], [0.42, 0.38, 22,  4], [0.95, 0.50, 38, -6],
-      [0.06, 0.48, 26, 20], [0.55, 0.82, 30, -14], [0.32, 0.10, 34,  8],
-      [0.70, 0.14, 24, 16], [0.22, 0.88, 42, -10], [0.88, 0.38, 20,  6],
-    ];
-    SEED_POSITIONS.forEach(([nx, ny, sizePx, rot], i) => {
-      const r = 3.6 + (i % 4) * 0.55;
-      const theta = nx * Math.PI * 2;
-      const phi   = ny * Math.PI;
-      const s = (sizePx / 46) * 0.38;
-
-      const spriteMat = new THREE.SpriteMaterial({
-        map: pawTextures[i % 6],
-        transparent: true,
-        opacity: 0.12 + (i % 5) * 0.04,
-        depthWrite: false,
-        rotation: rot * Math.PI / 180,
-      });
-      const sprite = new THREE.Sprite(spriteMat);
-      sprite.position.set(
-        r * Math.sin(phi) * Math.cos(theta),
-        r * Math.sin(phi) * Math.sin(theta) * 0.55,
-        r * Math.cos(phi) * 0.60
-      );
-      sprite.scale.set(s, s, s);
-      sprite.userData = {
-        oy: sprite.position.y,
-        phase: i * 0.52,
-        speed: 0.28 + (i % 3) * 0.12,
-      };
-      scene.add(sprite);
-      pawParticles.push(sprite);
-    });
-
-    /* ── XP burst particles (small glowing dots) ────── */
-    const DOT_COLORS = [0xff8a4c, 0xff3d3d, 0x2fcba0, 0xffc53d, 0xa98bff, 0x6ec8ff];
-    const dotPositions = new Float32Array(200 * 3);
-    const dotColors    = new Float32Array(200 * 3);
-    /* Pre-build deterministic positions in a shell */
-    for (let i = 0; i < 200; i++) {
-      const u = (i * 0.618033988749) % 1; // golden-ratio sequence
-      const v = (i * 0.381966011250) % 1;
-      const r = 3.2 + (i % 5) * 0.22;
-      const th = u * Math.PI * 2;
-      const ph = Math.acos(2 * v - 1);
-      dotPositions[i*3]   = r * Math.sin(ph) * Math.cos(th);
-      dotPositions[i*3+1] = r * Math.sin(ph) * Math.sin(th) * 0.5;
-      dotPositions[i*3+2] = r * Math.cos(ph) * 0.65;
-      const col = new THREE.Color(DOT_COLORS[i % 6]);
-      dotColors[i*3] = col.r; dotColors[i*3+1] = col.g; dotColors[i*3+2] = col.b;
-    }
-    const dotGeo = new THREE.BufferGeometry();
-    dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
-    dotGeo.setAttribute('color',    new THREE.BufferAttribute(dotColors, 3));
-    const dotMat = new THREE.PointsMaterial({
-      size: 0.052, vertexColors: true,
-      transparent: true, opacity: 0.55,
-      sizeAttenuation: true,
-    });
-    const dots = new THREE.Points(dotGeo, dotMat);
-    scene.add(dots);
-
-    /* ── Adapt scene to dark / light mode ───────────── */
-    const LIGHT_FOG = 0xfff4e6;
-    const DARK_FOG  = 0x1a1014;
-
-    function syncSceneTheme() {
-      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      scene.fog.color.setHex(dark ? DARK_FOG : LIGHT_FOG);
-      ambient.color.setHex(dark ? 0x1a1014 : 0xfff4e6);
-      ambient.intensity = dark ? 0.9 : 1.6;
-      keyLight.intensity = dark ? 1.6 : 2.2;
-      keyLight.color.setHex(dark ? 0xffddbf : 0xfff0dd);
-    }
-
-    syncSceneTheme(); // run once on load
-
-    new MutationObserver(syncSceneTheme).observe(
-      document.documentElement,
-      { attributes: true, attributeFilter: ['data-theme'] }
-    );
-
-    /* ── Mouse / touch parallax ──────────────────────── */
-    let mx = 0, my = 0, trx = 0, try_ = 0;
-    window.addEventListener('mousemove', e => {
-      mx = (e.clientX / window.innerWidth  - 0.5) * 2;
-      my = (e.clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
-    window.addEventListener('touchmove', e => {
-      if (!e.touches[0]) return;
-      mx = (e.touches[0].clientX / window.innerWidth  - 0.5) * 2;
-      my = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
-
-    /* ── Resize handler ──────────────────────────────── */
-    window.addEventListener('resize', syncSize, { passive: true });
-    syncSize();
-
-    /* ── Animation loop ──────────────────────────────── */
-    let t = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      syncSize();
-      t += 0.01;
-
-      /* Central paw: slow self-rotation + gentle bob */
-      pawGroup.rotation.y = Math.sin(t * 0.38) * 0.18 + t * 0.04;
-      pawGroup.position.y = Math.sin(t * 0.55) * 0.09;
-
-      /* Rings: slow independent rotations + opacity pulse */
-      ring1.rotation.y =  t * 0.28;
-      ring1.rotation.x =  0.32 + Math.sin(t * 0.4) * 0.06;
-      ringMat1.opacity  = 0.32 + Math.sin(t * 0.9) * 0.10;
-
-      ring2.rotation.y = -t * 0.18;
-      ring2.rotation.z =  0.18 + Math.sin(t * 0.55) * 0.05;
-      ringMat2.opacity  = 0.18 + Math.sin(t * 0.7 + 1.2) * 0.08;
-
-      ring3.rotation.y =  t * 0.12;
-      ring3.rotation.x =  0.5  + Math.cos(t * 0.35) * 0.06;
-      ringMat3.opacity  = 0.12 + Math.sin(t * 0.6 + 2.4) * 0.06;
-
-      /* Module bubbles: each orbits its own tilted plane */
-      moduleBubbles.forEach(b => {
-        const angle = b.phase + t * b.speed;
-
-        /* Orbit in a plane tilted by tiltX around X-axis and tiltZ around Z-axis */
-        const cx = Math.cos(angle) * b.r;
-        const cy = Math.sin(angle) * b.r;
-        const cz = 0;
-
-        /* Apply tilt: rotate the orbit plane */
-        const cosx = Math.cos(b.tiltX), sinx = Math.sin(b.tiltX);
-        const cosz = Math.cos(b.tiltZ), sinz = Math.sin(b.tiltZ);
-        const x =  cx * cosz - cy * sinz * cosx;
-        const y =  cx * sinz + cy * cosz * cosx;
-        const z =  cy * sinx;
-
-        b.mesh.position.set(x, y + Math.sin(t * 1.1 + b.phase) * 0.07, z);
-        b.light.position.copy(b.mesh.position);
-
-        /* Subtle scale breathe */
-        const pulse = 1.0 + Math.sin(t * 1.4 + b.phase) * 0.04;
-        b.mesh.scale.setScalar(pulse);
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(+dot.dataset.i); startAuto(); });
       });
 
-      /* Floating paw sprites: bob vertically */
-      pawParticles.forEach(s => {
-        const d = s.userData;
-        s.position.y = d.oy + Math.sin(t * d.speed + d.phase) * 0.18;
-        s.material.opacity = 0.10 + Math.sin(t * d.speed * 0.8 + d.phase) * 0.07;
-      });
+      /* Touch swipe */
+      var sx = 0;
+      var vp = track.parentElement;
+      if (vp) {
+        vp.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+        vp.addEventListener('touchend', function(e) {
+          var dx = e.changedTouches[0].clientX - sx;
+          if (Math.abs(dx) > 28) { goTo(dx < 0 ? Math.min(current+1, SCREENS-1) : Math.max(current-1, 0)); startAuto(); }
+        }, { passive: true });
+      }
 
-      /* Dot field: slow rotation */
-      dots.rotation.y = t * 0.025;
-      dots.rotation.x = Math.sin(t * 0.15) * 0.04;
+      goTo(0);
+      startAuto();
+    })();
 
-      /* Mouse parallax: smooth lerp, moderate strength */
-      trx  += (mx  * 0.32 - trx)  * 0.04;
-      try_ += (-my * 0.20 - try_) * 0.04;
-      scene.rotation.y = trx;
-      scene.rotation.x = try_;
-
-      renderer.render(scene, camera);
-    }
-    animate();
   </script>
+
 </body>
 </html>

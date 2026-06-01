@@ -17,10 +17,23 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-supabase: Client = create_client(
-    os.environ.get("SUPABASE_URL"),
-    os.environ.get("SUPABASE_KEY"),
-)
+# Global mock waitlist for development/preview when Supabase is not configured
+mock_waitlist = []
+
+# Try to initialize Supabase; fallback to Mock mode if not configured or credentials are placeholders
+supabase = None
+supabase_url = os.environ.get("SUPABASE_URL")
+supabase_key = os.environ.get("SUPABASE_KEY")
+
+if not supabase_url or "your-project-ref" in supabase_url or not supabase_key or "your_supabase_anon_jwt" in supabase_key:
+    logger.warning("Supabase URL or Key is not configured. Running in mock/development mode with in-memory database.")
+else:
+    try:
+        supabase = create_client(supabase_url, supabase_key)
+        logger.info("Supabase client initialized successfully.")
+    except Exception as e:
+        logger.warning("Failed to initialize Supabase client: %s. Falling back to mock/development mode.", e)
+
 
 # Zoho Mail SMTP — verify host/port against Mail → Settings → Mail Accounts → Server configuration
 ZOHO_MAIL_ADDRESS = os.environ.get("ZOHO_MAIL_ADDRESS")
@@ -161,7 +174,13 @@ def join_waitlist():
             "pet_count": pet_count_val,
         }
 
-        supabase.table("waitlist").insert(signup_data).execute()
+        if supabase:
+            supabase.table("waitlist").insert(signup_data).execute()
+        else:
+            # Check for duplicate email in mock waitlist
+            if any(item["email"] == normalized_email for item in mock_waitlist):
+                raise ValueError("unique constraint")
+            mock_waitlist.append(signup_data)
 
         send_thank_you_email(
             name=data.get("name"),
@@ -170,8 +189,11 @@ def join_waitlist():
             pet_count=pet_count_val,
         )
 
-        count_result = supabase.table("waitlist").select("id", count="exact").execute()
-        position = count_result.count or 0
+        if supabase:
+            count_result = supabase.table("waitlist").select("id", count="exact").execute()
+            position = count_result.count or 0
+        else:
+            position = len(mock_waitlist)
 
         return jsonify(
             {"success": True, "position": position, "total_signups": position}
@@ -196,8 +218,12 @@ def join_waitlist():
 @app.route("/api/stats", methods=["GET"])
 def get_stats():
     try:
-        count_result = supabase.table("waitlist").select("id", count="exact").execute()
-        return jsonify({"success": True, "total_signups": count_result.count or 0})
+        if supabase:
+            count_result = supabase.table("waitlist").select("id", count="exact").execute()
+            total_signups = count_result.count or 0
+        else:
+            total_signups = len(mock_waitlist)
+        return jsonify({"success": True, "total_signups": total_signups})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
@@ -205,8 +231,14 @@ def get_stats():
 @app.route("/todos")
 def index():
     try:
-        response = supabase.table("todos").select("*").execute()
-        todos = response.data
+        if supabase:
+            response = supabase.table("todos").select("*").execute()
+            todos = response.data
+        else:
+            todos = [
+                {"name": "[Development Mock Mode] Setup real Supabase credentials in your .env file to enable persistent storage!"},
+                {"name": "Check out the gorgeous landing page at the root route!"}
+            ]
 
         html = "<h1>Todos</h1><ul>"
         for todo in todos:
