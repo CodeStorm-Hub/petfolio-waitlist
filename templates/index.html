@@ -56,15 +56,61 @@
       --shadow-soft: 0 8px 24px -10px rgba(120,60,20,0.18);
     }
 
+    /* ── DARK MODE TOKENS ────────────────────────── */
+    /* Mirrors the dark palette from app.jsx — warm near-black base (#1A1014)
+       so the brand warmth survives even in dark mode.                        */
+    [data-theme="dark"] {
+      --cream:       #1A1014;
+      --cream-2:     #231519;
+      --surface:     #2A1C20;
+      --surface-2:   #201218;
+      --ink-950:     #F5E8D5;
+      --ink-700:     #D4A882;
+      --ink-500:     #9A7460;
+      --ink-300:     #4A3028;
+      --line:        #3A2220;
+      --line-2:      #4A2C28;
+
+      /* Accent -soft → semi-transparent tint on dark surface */
+      --tangerine-soft: rgba(255,138,76, 0.18);
+      --poppy-soft:     rgba(255, 61,61, 0.16);
+      --mint-soft:      rgba( 47,203,160,0.16);
+      --sunny-soft:     rgba(255,197,61, 0.16);
+      --lilac-soft:     rgba(169,139,255,0.16);
+      --sky-soft:       rgba(110,200,255,0.16);
+
+      /* -700 shades lighten on dark to stay readable on tinted surfaces */
+      --tangerine-700: #FF9F6A;
+      --poppy-700:     #FF6B6B;
+      --mint-700:      #5DDBBB;
+      --sunny-700:     #FFD46A;
+      --lilac-700:     #C4AEFF;
+      --sky-700:       #8AD5FF;
+
+      --shadow-card: 0 2px 0 0 rgba(0,0,0,0.35), 0 12px 28px -16px rgba(0,0,0,0.55);
+      --shadow-soft: 0 8px 24px -10px rgba(0,0,0,0.45);
+    }
+
+    /* Smooth cross-fade when toggling — only target properties that change */
+    body, .nav, .module-card, .perk-card, .testimonial,
+    .hero-float-badge, .hero-float-stat, .field input, .field select,
+    .form-success, .cta-form input, .footer-social-link,
+    .section, .perks-bg, .features-grid, .phone-frame, .phone-screen,
+    .phone-card, .module-ui, .module-ui-row {
+      transition: background-color 360ms ease, border-color 280ms ease,
+                  color 280ms ease, box-shadow 360ms ease;
+    }
+
     /* ── RESET ───────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Nunito', system-ui, sans-serif;
-      background: var(--cream);
+      background-color: var(--cream);
       color: var(--ink-950);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background-color 360ms ease, color 280ms ease;
     }
     ::selection { background: var(--tangerine-soft); color: var(--tangerine-700); }
 
@@ -82,11 +128,18 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
-      transition: background 300ms, box-shadow 300ms;
+      transition: background 360ms, box-shadow 300ms, border-color 280ms;
     }
     .nav.scrolled {
       background: rgba(255,244,230,0.96);
       box-shadow: 0 4px 24px -8px rgba(120,60,20,0.12);
+    }
+    [data-theme="dark"] .nav {
+      background: rgba(26,16,20,0.88);
+    }
+    [data-theme="dark"] .nav.scrolled {
+      background: rgba(26,16,20,0.97);
+      box-shadow: 0 4px 24px -8px rgba(0,0,0,0.4);
     }
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
@@ -144,6 +197,30 @@
     }
     .btn-dark:active { box-shadow: 0 2px 0 0 rgba(0,0,0,0.6); }
 
+    /* ── THEME TOGGLE BUTTON ─────────────────────── */
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--line-2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--ink-700);
+      box-shadow: var(--shadow-card);
+      flex-shrink: 0; position: relative; overflow: hidden;
+      transition: background 200ms, border-color 200ms, transform 120ms, box-shadow 200ms;
+    }
+    .theme-toggle:hover {
+      background: var(--tangerine-soft);
+      border-color: var(--tangerine);
+      color: var(--tangerine-700);
+    }
+    .theme-toggle:active { transform: scale(0.90); }
+    .theme-toggle svg { transition: transform 400ms cubic-bezier(.34,1.56,.64,1), opacity 300ms ease; }
+    /* Moon shown in light mode, Sun shown in dark mode */
+    .theme-icon-moon { position: absolute; }
+    .theme-icon-sun  { position: absolute; transform: scale(0) rotate(-90deg); opacity: 0; }
+    [data-theme="dark"] .theme-icon-moon { transform: scale(0) rotate(90deg); opacity: 0; }
+    [data-theme="dark"] .theme-icon-sun  { transform: scale(1) rotate(0deg);  opacity: 1; }
+
     @media (max-width: 600px) {
       .nav { padding: 12px 20px; }
       .nav-badge { display: none; }
@@ -169,6 +246,15 @@
         radial-gradient(circle at 5% 92%, rgba(47,203,160,0.12) 0%, transparent 38%),
         var(--cream);
       pointer-events: none;
+      transition: background 360ms ease;
+    }
+    [data-theme="dark"] .hero::before {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(255,138,76,0.12) 0%, transparent 40%),
+        radial-gradient(circle at 92% 8%, rgba(255,197,61,0.09) 0%, transparent 38%),
+        radial-gradient(circle at 90% 90%, rgba(255,61,61,0.07) 0%, transparent 40%),
+        radial-gradient(circle at 5% 92%, rgba(47,203,160,0.07) 0%, transparent 38%),
+        var(--cream);
     }
     .hero-copy { position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -230,13 +316,22 @@
       font-size: 15px; font-weight: 600;
       color: var(--ink-950);
       outline: none;
-      transition: border-color 150ms, box-shadow 150ms;
+      transition: border-color 150ms, box-shadow 150ms, background-color 360ms;
       -webkit-appearance: none; appearance: none;
     }
     .field input::placeholder { color: var(--ink-300); }
     .field input:focus, .field select:focus {
       border-color: var(--tangerine);
       box-shadow: 0 0 0 3px rgba(255,138,76,0.18);
+    }
+    [data-theme="dark"] .field input,
+    [data-theme="dark"] .field select {
+      background-color: rgba(42,28,32,0.95);
+      color: var(--ink-950);
+    }
+    [data-theme="dark"] .cta-form input {
+      background-color: rgba(42,28,32,0.95);
+      color: var(--ink-950);
     }
     .field.full { grid-column: 1 / -1; }
     .select-wrap { position: relative; }
@@ -473,6 +568,13 @@
         radial-gradient(circle at 15% 50%, rgba(255,138,76,0.10), transparent 45%),
         radial-gradient(circle at 85% 50%, rgba(169,139,255,0.10), transparent 45%),
         var(--cream-2);
+      transition: background 360ms ease;
+    }
+    [data-theme="dark"] .perks-bg {
+      background:
+        radial-gradient(circle at 15% 50%, rgba(255,138,76,0.08), transparent 45%),
+        radial-gradient(circle at 85% 50%, rgba(169,139,255,0.08), transparent 45%),
+        var(--cream-2);
     }
     .perks-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
@@ -704,9 +806,14 @@
     }
 
     /* ── FOOTER ──────────────────────────────────── */
+    /* Footer is always dark — doesn't invert with the page */
     footer {
-      background: var(--ink-950);
+      background: #1A0E0A;
       padding: 56px 6vw 40px;
+      transition: background 360ms ease;
+    }
+    [data-theme="dark"] footer {
+      background: #0D0609;
     }
     .footer-inner {
       max-width: 1160px; margin: 0 auto;
@@ -922,6 +1029,20 @@
     </a>
     <div class="nav-cta">
       <span class="nav-badge">🔥 Spots filling fast</span>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <!-- Moon: shown in light mode -->
+        <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+        </svg>
+        <!-- Sun: shown in dark mode -->
+        <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
       <a href="#waitlist" class="btn btn-primary">Join Now</a>
     </div>
   </nav>
@@ -1506,6 +1627,46 @@
 
 
     /* ════════════════════════════════════════════════
+       1b. DARK MODE TOGGLE
+       ════════════════════════════════════════════════ */
+    (function initTheme() {
+      const root    = document.documentElement;
+      const btn     = document.getElementById('theme-toggle');
+      const STORAGE = 'petfolio-theme';
+
+      /* Determine initial theme: saved preference → system preference → light */
+      function getInitialTheme() {
+        const saved = localStorage.getItem(STORAGE);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem(STORAGE, theme);
+        if (btn) btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      /* Apply on load — do this before first paint to avoid flash */
+      applyTheme(getInitialTheme());
+
+      /* Toggle on click */
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+        });
+      }
+
+      /* React to OS-level dark mode changes (if user hasn't overridden) */
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem(STORAGE)) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    })();
+
+    /* ════════════════════════════════════════════════
        2. SCROLL ANIMATIONS (IntersectionObserver)
        ════════════════════════════════════════════════ */
     (function initScrollAnimations() {
@@ -1752,8 +1913,9 @@
     camera.lookAt(0, 0, 0);
 
     /* ── Lighting ─────────────────────────────────────── */
-    /* Warm ambient matches the cream palette */
-    scene.add(new THREE.AmbientLight(0xfff4e6, 1.6));
+    /* Warm ambient matches the cream palette — saved as const for syncSceneTheme() */
+    const ambient = new THREE.AmbientLight(0xfff4e6, 1.6);
+    scene.add(ambient);
 
     /* Key light — warm, high-front-right */
     const keyLight = new THREE.DirectionalLight(0xfff0dd, 2.2);
@@ -2040,6 +2202,26 @@
     });
     const dots = new THREE.Points(dotGeo, dotMat);
     scene.add(dots);
+
+    /* ── Adapt scene to dark / light mode ───────────── */
+    const LIGHT_FOG = 0xfff4e6;
+    const DARK_FOG  = 0x1a1014;
+
+    function syncSceneTheme() {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      scene.fog.color.setHex(dark ? DARK_FOG : LIGHT_FOG);
+      ambient.color.setHex(dark ? 0x1a1014 : 0xfff4e6);
+      ambient.intensity = dark ? 0.9 : 1.6;
+      keyLight.intensity = dark ? 1.6 : 2.2;
+      keyLight.color.setHex(dark ? 0xffddbf : 0xfff0dd);
+    }
+
+    syncSceneTheme(); // run once on load
+
+    new MutationObserver(syncSceneTheme).observe(
+      document.documentElement,
+      { attributes: true, attributeFilter: ['data-theme'] }
+    );
 
     /* ── Mouse / touch parallax ──────────────────────── */
     let mx = 0, my = 0, trx = 0, try_ = 0;
